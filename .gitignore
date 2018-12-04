@@ -1,4 +1,7 @@
 /Library
 /obj
+/Temp
+/.vs
 
+*.csproj
 *.apk
