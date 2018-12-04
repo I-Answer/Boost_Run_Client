@@ -16,3 +16,4 @@
 Assets/StarSparrow filter=lfs diff=lfs merge=lfs -text
 Assets/FlamesOfThePhoenix filter=lfs diff=lfs merge=lfs -text
 Assets/AsteroidPack filter=lfs diff=lfs merge=lfs -text
+Assets/StarSparrow/SubstancePainter/StarSparrow.spp filter=lfs diff=lfs merge=lfs -text
