@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     private new Transform transform;
     private PlayerSpeed speed;
@@ -12,6 +12,9 @@ public abstract class Player : MonoBehaviour {
     private Vector3 myPos;
     private uint mySpeed;
 
+    public float skillCoolTime;
+    private bool bCanUseSkill;
+
     protected virtual void Awake() {
         speed = GetComponent<PlayerSpeed>();
         speed.SpeedEvent = (speed) => mySpeed = speed;
@@ -20,6 +23,8 @@ public abstract class Player : MonoBehaviour {
 
         particle = transform.Find("Fire").GetComponent<ParticleSystem>().main;
         myPos = transform.position;
+
+        bCanUseSkill = true;
     }
 
     public void Move(Vector3 newPos) {
@@ -40,7 +45,16 @@ public abstract class Player : MonoBehaviour {
         transform.position = myPos;
     }
 
-    public abstract void UseSkill();
+    public virtual void UseSkill(System.Action<float> ChangeUI) {
+        ChangeUI(skillCoolTime);
+        StartCoroutine(CoolTime());
+    }
+
+    private IEnumerator CoolTime() {
+        bCanUseSkill = false;
+        yield return CoroutineManager.WaitForSeconds(skillCoolTime);
+        bCanUseSkill = true;
+    }
 
     public void Collision() {
         speed.DecreaseSpeed();
@@ -53,5 +67,9 @@ public abstract class Player : MonoBehaviour {
 
     public Vector3 Position {
         get { return myPos; }
+    }
+
+    protected bool CanUseSkill {
+        get { return bCanUseSkill; }
     }
 }

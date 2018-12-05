@@ -13,8 +13,11 @@ public class RedPlayer : Player {
         myHp = GetComponent<PlayerHp>();
     }
 
-    public override void UseSkill() {
-        Debug.Log(myHp.Hp);
+    public override void UseSkill(System.Action<float> ChangeUI) {
+        if (!CanUseSkill) return;
+
+        base.UseSkill(ChangeUI);
+
         myHp.ChangeHp(myHp.Hp + increaseHp);
     }
 }
