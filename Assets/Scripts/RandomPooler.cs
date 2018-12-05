@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomPooler : MonoBehaviour {
+public abstract class RandomPooler : MonoBehaviour {
 
     private readonly Vector3 appearZPos = new Vector3(0, 0, 600);
 
@@ -29,7 +29,17 @@ public class RandomPooler : MonoBehaviour {
             appearXPos.Add(temp);
     }
 
-    protected void Request() {
+    private IEnumerator Start() {
+        while (true) {
+            yield return CoroutineManager.WaitForSeconds(GetWaitTime());
+
+            OnActivate();
+        }
+    }
+
+    protected abstract void OnActivate();
+
+    public void Request() {
         GetRandomObject().Active(Arrange, GetRandomXPos() + appearZPos);
     }
 
@@ -50,7 +60,7 @@ public class RandomPooler : MonoBehaviour {
         return obj;
     }
 
-    protected float GetWaitTime() {
+    private float GetWaitTime() {
         if (Mathf.Approximately(playerSpeed, 0)) return 0.1f;
 
         return distance / playerSpeed;

@@ -7,6 +7,7 @@ public abstract class FieldObject : MonoBehaviour {
     private new Transform transform;
 
     private Player player;
+    private Vector3 moveVec;
 
     private uint playerSpeed;
     private float playerPos;
@@ -29,6 +30,8 @@ public abstract class FieldObject : MonoBehaviour {
         gameObject = base.gameObject;
         transform = base.transform;
 
+        moveVec = Vector3.zero;
+
         gameObject.SetActive(false);
     }
 
@@ -43,7 +46,8 @@ public abstract class FieldObject : MonoBehaviour {
 
     private IEnumerator Move(System.Action<FieldObject> Arrange) {
         while (transform.localPosition.z > 0f) {
-            transform.Translate(0, 0, -playerSpeed * 0.4f * Time.deltaTime);
+            moveVec.z = playerSpeed * 0.4f * Time.deltaTime;
+            transform.position -= moveVec;
 
             if (IsCollision())
                 OnCollision();

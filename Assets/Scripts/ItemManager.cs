@@ -1,12 +1,13 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 public class ItemManager : RandomPooler {
 
-	private IEnumerator Start() {
-        while (true) {
-            yield return CoroutineManager.WaitForSeconds(GetWaitTime());
+    public float appearProbability;
 
-            Request();
-        }
+    protected override void OnActivate() {
+        if (Random.Range(0f, 1f) > appearProbability) return;
+
+        Request();
     }
 }
