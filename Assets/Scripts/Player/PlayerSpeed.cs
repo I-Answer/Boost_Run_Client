@@ -26,7 +26,7 @@ public class PlayerSpeed : MonoBehaviour {
     }
 
     private uint GetCollisionSpeed() {
-        uint result = (speed >> 3) + decreaseSpeed;
+        uint result = (speed >> 2) + decreaseSpeed;
 
         return result;
     }
