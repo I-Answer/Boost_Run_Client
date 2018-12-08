@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class PurplePlayer : Player {
 
-    public override void UseSkill(System.Action<float> ChangeUI) {
+    public PlayerSpeed playerSpeed;
+    public uint boostScale;
+
+    private bool bBoost;
+
+    public override void UseSkill() {
         if (!CanUseSkill) return;
 
-        base.UseSkill(ChangeUI);
+        base.UseSkill();
 
-        Debug.Log("Skill");
+        playerSpeed.IncreaseScale *= boostScale;
+        bBoost = true;
+    }
+
+    public override void Collision() {
+        base.Collision();
+
+        if (bBoost) {
+            playerSpeed.IncreaseScale = 1;
+            bBoost = false;
+        }
     }
 }

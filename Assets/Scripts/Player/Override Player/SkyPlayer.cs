@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SkyPlayer : Player {
 
-    public override void UseSkill(System.Action<float> ChangeUI) {
+    public override void UseSkill() {
         if (!CanUseSkill) return;
 
-        base.UseSkill(ChangeUI);
+        base.UseSkill();
 
         Debug.Log("Skill");
     }

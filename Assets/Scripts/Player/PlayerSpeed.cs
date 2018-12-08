@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class PlayerSpeed : MonoBehaviour {
 
-    private uint speed;
+    private uint speed, increaseScale = 1;
 
     public uint startSpeed, increaseSpeed, decreaseSpeed;
     public float increaseTime;
@@ -16,7 +16,7 @@ public class PlayerSpeed : MonoBehaviour {
         while (true) {
             yield return CoroutineStorage.WaitForSeconds(increaseTime);
 
-            ChangeSpeed(speed + increaseSpeed);
+            ChangeSpeed(speed + (increaseSpeed * increaseScale));
         }
     }
 
@@ -33,7 +33,7 @@ public class PlayerSpeed : MonoBehaviour {
 
     private SpeedEvent ChangeSpeedEvent;
 
-    private void ChangeSpeed(uint speed) {
+    public void ChangeSpeed(uint speed) {
         if (speed < 0) speed = 0;
 
         if (this.speed != speed)
@@ -49,5 +49,10 @@ public class PlayerSpeed : MonoBehaviour {
 
             ChangeSpeedEvent.AddListener(value);
         }
+    }
+
+    public uint IncreaseScale {
+        get { return increaseScale; }
+        set { increaseScale = value; }
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 public class Skill_UI : MonoBehaviour, IPointerDownHandler {
 
     private Image myImage;
-
     private Player player;
 
     private void Awake() {
@@ -17,15 +16,15 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler {
 #if UNITY_EDITOR
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
-            player.UseSkill(UpdateUI);
+            player.UseSkill();
     }
 #endif
 
     public void OnPointerDown(PointerEventData ped) {
-        player.UseSkill(UpdateUI);
+        player.UseSkill();
     }
 
-    private void UpdateUI(float coolTime) {
+    public void UpdateUI(float coolTime) {
         StartCoroutine(FillUI(coolTime));
     }
 

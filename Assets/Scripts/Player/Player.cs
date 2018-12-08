@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
     private new Transform transform;
     private PlayerSpeed speed;
 
+    private Skill_UI skillUi;
     private ParticleSystem.MainModule particle;
     private Coroutine runningCoroutine;
 
@@ -21,10 +22,14 @@ public class Player : MonoBehaviour {
 
         transform = gameObject.transform;
 
+        skillUi = GameObject.FindWithTag("Skill Ui").GetComponent<Skill_UI>();
         particle = transform.Find("Fire").GetComponent<ParticleSystem>().main;
         myPos = transform.position;
+    }
 
-        bCanUseSkill = true;
+    private void Start() {
+        StartCoroutine(CoolTime());
+        skillUi.UpdateUI(skillCoolTime);
     }
 
     public void Move(Vector3 newPos) {
@@ -45,8 +50,8 @@ public class Player : MonoBehaviour {
         transform.position = myPos;
     }
 
-    public virtual void UseSkill(System.Action<float> ChangeUI) {
-        ChangeUI(skillCoolTime);
+    public virtual void UseSkill() {
+        skillUi.UpdateUI(skillCoolTime);
         StartCoroutine(CoolTime());
     }
 
@@ -56,7 +61,7 @@ public class Player : MonoBehaviour {
         bCanUseSkill = true;
     }
 
-    public void Collision() {
+    public virtual void Collision() {
         speed.DecreaseSpeed();
     }
 
@@ -67,6 +72,10 @@ public class Player : MonoBehaviour {
 
     public Vector3 Position {
         get { return myPos; }
+    }
+
+    protected uint MySpeed {
+        get { return mySpeed; }
     }
 
     protected bool CanUseSkill {
