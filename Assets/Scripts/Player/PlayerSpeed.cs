@@ -14,7 +14,7 @@ public class PlayerSpeed : MonoBehaviour {
         ChangeSpeed(startSpeed);
 
         while (true) {
-            yield return CoroutineManager.WaitForSeconds(increaseTime);
+            yield return CoroutineStorage.WaitForSeconds(increaseTime);
 
             ChangeSpeed(speed + increaseSpeed);
         }

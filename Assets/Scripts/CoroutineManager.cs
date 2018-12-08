@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-internal static class CoroutineManager {
+internal static class CoroutineStorage {
 
 	class FloatComparer : IEqualityComparer<float> {
         bool IEqualityComparer<float>.Equals(float x, float y) {

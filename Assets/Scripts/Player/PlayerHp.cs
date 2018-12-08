@@ -26,12 +26,12 @@ public class PlayerHp : MonoBehaviour {
     private IEnumerator Start() {
         WaitUntil waitBelow1800 = new WaitUntil(() => mySpeed < 1800f);
 
-        yield return CoroutineManager.WaitForSeconds(invincibleTime);
+        yield return CoroutineStorage.WaitForSeconds(invincibleTime);
 
         while (bAlive) {
             yield return waitBelow1800;
 
-            yield return CoroutineManager.WaitForSeconds(decreaseTime);
+            yield return CoroutineStorage.WaitForSeconds(decreaseTime);
 
             ChangeHp(hp - decreaseHp);
         }

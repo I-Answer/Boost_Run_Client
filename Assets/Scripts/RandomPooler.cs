@@ -31,7 +31,7 @@ public abstract class RandomPooler : MonoBehaviour {
 
     private IEnumerator Start() {
         while (true) {
-            yield return CoroutineManager.WaitForSeconds(GetWaitTime());
+            yield return CoroutineStorage.WaitForSeconds(GetWaitTime());
 
             OnActivate();
         }

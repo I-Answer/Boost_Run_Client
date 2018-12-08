@@ -52,7 +52,7 @@ public class Player : MonoBehaviour {
 
     private IEnumerator CoolTime() {
         bCanUseSkill = false;
-        yield return CoroutineManager.WaitForSeconds(skillCoolTime);
+        yield return CoroutineStorage.WaitForSeconds(skillCoolTime);
         bCanUseSkill = true;
     }
 
