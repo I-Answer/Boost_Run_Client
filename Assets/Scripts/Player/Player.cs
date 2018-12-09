@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
     private new Transform transform;
     private PlayerSpeed speed;
 
+    public Sprite uiImage;
     private Skill_UI skillUi;
+
     private ParticleSystem.MainModule particle;
     private Coroutine runningCoroutine;
 
@@ -22,7 +25,13 @@ public class Player : MonoBehaviour {
 
         transform = gameObject.transform;
 
-        skillUi = GameObject.FindWithTag("Skill Ui").GetComponent<Skill_UI>();
+        GameObject skillObj = GameObject.FindWithTag("Skill Ui");
+
+        skillUi = skillObj.GetComponent<Skill_UI>();
+
+        skillObj.transform.parent.GetComponent<Image>().sprite = uiImage;
+        skillObj.GetComponent<Image>().sprite = uiImage;
+
         particle = transform.Find("Fire").GetComponent<ParticleSystem>().main;
         myPos = transform.position;
     }
