@@ -12,6 +12,6 @@ public class RedPlayer : Player {
 
         base.UseSkill();
 
-        myHp.ChangeHp(myHp.Hp + increaseHp);
+        myHp.IncreaseSpeed(increaseHp);
     }
 }

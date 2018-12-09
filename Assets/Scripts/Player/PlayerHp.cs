@@ -39,6 +39,10 @@ public class PlayerHp : MonoBehaviour {
         GameManager.GameSet();
     }
 
+    public void IncreaseSpeed(float increaseHp) {
+        ChangeHp(hp + increaseHp);
+    }
+
     public void ChangeHp(float newHp) {
         if (newHp <= 0f) {
             bAlive = false;

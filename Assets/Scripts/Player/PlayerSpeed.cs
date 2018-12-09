@@ -33,7 +33,7 @@ public class PlayerSpeed : MonoBehaviour {
 
     private SpeedEvent ChangeSpeedEvent;
 
-    public void ChangeSpeed(uint speed) {
+    private void ChangeSpeed(uint speed) {
         if (speed < 0) speed = 0;
 
         if (this.speed != speed)
