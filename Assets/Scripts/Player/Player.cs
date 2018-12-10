@@ -13,8 +13,6 @@ public class Player : MonoBehaviour {
     private ParticleSystem.MainModule particle;
     private Coroutine runningCoroutine;
 
-    private WaitForSecondsRealtime waitForCooltime;
-
     private Vector3 myPos;
     private uint mySpeed;
 
@@ -36,8 +34,6 @@ public class Player : MonoBehaviour {
 
         particle = transform.Find("Fire").GetComponent<ParticleSystem>().main;
         myPos = transform.position;
-
-        waitForCooltime = new WaitForSecondsRealtime(skillCoolTime);
     }
 
     private void Start() {
@@ -70,7 +66,7 @@ public class Player : MonoBehaviour {
 
     private IEnumerator CoolTime() {
         bCanUseSkill = false;
-        yield return waitForCooltime;
+        yield return CoroutineStorage.WaitForSeconds(skillCoolTime);
         bCanUseSkill = true;
     }
 
