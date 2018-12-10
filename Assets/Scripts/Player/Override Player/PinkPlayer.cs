@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PinkPlayer : Player {
 
-    public PlayerSpeed mySpeed;
-    public PlayerHp myHp;
+    private PlayerSpeed mySpeed;
+    private PlayerHp myHp;
 
     public uint changeSpeed;
     public float changeHp;
+
+    protected override void Awake() {
+        base.Awake();
+
+        mySpeed = GetComponent<PlayerSpeed>();
+        myHp = GetComponent<PlayerHp>();
+    }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;

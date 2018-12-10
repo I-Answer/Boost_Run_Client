@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class RedPlayer : Player {
 
-    public PlayerHp myHp;
+    private PlayerHp myHp;
     public float increaseHp;
+
+    protected override void Awake() {
+        base.Awake();
+
+        myHp = GetComponent<PlayerHp>();
+    }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;

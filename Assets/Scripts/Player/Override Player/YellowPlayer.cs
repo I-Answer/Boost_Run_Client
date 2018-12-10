@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class YellowPlayer : Player {
 
-    public PlayerSpeed mySpeed;
+    private PlayerSpeed mySpeed;
 
     public uint loanSpeed;
     public float loanTime;
+
+    protected override void Awake() {
+        base.Awake();
+
+        mySpeed = GetComponent<PlayerSpeed>();
+    }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
