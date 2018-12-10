@@ -14,6 +14,12 @@ public class YellowPlayer : Player {
 
         base.UseSkill();
 
-        StartCoroutine(mySpeed.LoanSpeed(loanSpeed, loanTime));
+        StartCoroutine(LoanSpeed());
+    }
+
+    private IEnumerator LoanSpeed() {
+        mySpeed.ChangeSpeed(MySpeed + loanSpeed);
+        yield return CoroutineStorage.WaitForSeconds(loanTime);
+        mySpeed.ChangeSpeed(MySpeed - loanSpeed);
     }
 }
