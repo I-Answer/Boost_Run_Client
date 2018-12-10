@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 33315466005035992}
   - component: {fileID: 23885286622265222}
   - component: {fileID: 114545048304636676}
-  - component: {fileID: 114697325795282638}
   - component: {fileID: 114285098037492414}
   - component: {fileID: 114193930489494448}
   m_Layer: 0
@@ -160,21 +159,6 @@ MonoBehaviour:
   uiImage: {fileID: 21300000, guid: 8abb14d97fc2f4c999f5291f611d5893, type: 3}
   skillCoolTime: 15
   invincibleTime: 5
---- !u!114 &114697325795282638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1439365958636920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd31e03803a350246a9c91d1f0d56023, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiImage: {fileID: 21300000, guid: a45bb033858a8498c966ed62e0400cfb, type: 3}
-  skillCoolTime: 7
-  myHp: {fileID: 114193930489494448}
-  increaseHp: 0.15
 --- !u!198 &198111689179062298
 ParticleSystem:
   m_ObjectHideFlags: 1
