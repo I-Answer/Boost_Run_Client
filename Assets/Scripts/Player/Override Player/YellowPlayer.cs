@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class YellowPlayer : Player {
 
+    public PlayerSpeed mySpeed;
+
+    public uint loanSpeed;
+    public float loanTime;
+
     public override void UseSkill() {
         if (!CanUseSkill) return;
 
         base.UseSkill();
 
-        Debug.Log("Skill");
+        StartCoroutine(mySpeed.LoanSpeed(loanSpeed, loanTime));
     }
 }

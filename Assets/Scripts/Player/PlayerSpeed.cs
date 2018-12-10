@@ -25,6 +25,12 @@ public class PlayerSpeed : MonoBehaviour {
         ChangeSpeed(speed - GetCollisionSpeed());
     }
 
+    public IEnumerator LoanSpeed(uint loanSpeed, float loanTime) {
+        ChangeSpeed(speed + loanSpeed);
+        yield return CoroutineStorage.WaitForSeconds(loanTime);
+        ChangeSpeed(speed - loanSpeed);
+    }
+
     private uint GetCollisionSpeed() {
         uint result = (speed >> 2) + decreaseSpeed;
 
