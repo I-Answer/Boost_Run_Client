@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114433586140158740}
   - component: {fileID: 114620682396145304}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Sky Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
