@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PurplePlayer : Player {
 
-    private PlayerSpeed mySpeed;
+    private PlayerSpeed playerSpeed;
     public uint boostScale;
 
     private bool bBoost;
@@ -12,15 +12,15 @@ public class PurplePlayer : Player {
     protected override void Awake() {
         base.Awake();
 
-        mySpeed = GetComponent<PlayerSpeed>();
+        playerSpeed = GetComponent<PlayerSpeed>();
     }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
 
         base.UseSkill();
-
-        mySpeed.IncreaseScale *= boostScale;
+        
+        playerSpeed.IncreaseScale *= boostScale;
         bBoost = true;
     }
 
@@ -28,7 +28,7 @@ public class PurplePlayer : Player {
         base.Collision();
 
         if (bBoost) {
-            mySpeed.IncreaseScale = 1;
+            playerSpeed.IncreaseScale = 1;
             bBoost = false;
         }
     }

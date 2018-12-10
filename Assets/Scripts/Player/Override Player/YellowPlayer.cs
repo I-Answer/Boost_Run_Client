@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class YellowPlayer : Player {
 
-    private PlayerSpeed mySpeed;
+    private PlayerSpeed playerSpeed;
 
     public uint loanSpeed;
     public float loanTime;
@@ -12,7 +12,7 @@ public class YellowPlayer : Player {
     protected override void Awake() {
         base.Awake();
 
-        mySpeed = GetComponent<PlayerSpeed>();
+        playerSpeed = GetComponent<PlayerSpeed>();
     }
 
     public override void UseSkill() {
@@ -24,8 +24,8 @@ public class YellowPlayer : Player {
     }
 
     private IEnumerator LoanSpeed() {
-        mySpeed.ChangeSpeed(MySpeed + loanSpeed);
+        playerSpeed.ChangeSpeed(MySpeed + loanSpeed);
         yield return CoroutineStorage.WaitForSeconds(loanTime);
-        mySpeed.ChangeSpeed(MySpeed - loanSpeed);
+        playerSpeed.ChangeSpeed(MySpeed - loanSpeed);
     }
 }

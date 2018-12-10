@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PinkPlayer : Player {
 
-    private PlayerSpeed mySpeed;
-    private PlayerHp myHp;
+    private PlayerSpeed playerSpeed;
+    private PlayerHp playerHp;
 
     public uint changeSpeed;
     public float changeHp;
@@ -13,8 +13,8 @@ public class PinkPlayer : Player {
     protected override void Awake() {
         base.Awake();
 
-        mySpeed = GetComponent<PlayerSpeed>();
-        myHp = GetComponent<PlayerHp>();
+        playerSpeed = GetComponent<PlayerSpeed>();
+        playerHp = GetComponent<PlayerHp>();
     }
 
     public override void UseSkill() {
@@ -27,12 +27,12 @@ public class PinkPlayer : Player {
     }
 
     private void SpeedToHp() {
-        mySpeed.ChangeSpeed(MySpeed - changeSpeed);
-        myHp.ChangeHp(myHp.Hp + changeHp);
+        playerSpeed.ChangeSpeed(MySpeed - changeSpeed);
+        playerHp.ChangeHp(playerHp.Hp + changeHp);
     }
 
     private void HpToSpeed() {
-        mySpeed.ChangeSpeed(MySpeed + changeSpeed);
-        myHp.ChangeHp(myHp.Hp - changeHp);
+        playerSpeed.ChangeSpeed(MySpeed + changeSpeed);
+        playerHp.ChangeHp(playerHp.Hp - changeHp);
     }
 }
