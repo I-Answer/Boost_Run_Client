@@ -2,43 +2,40 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public partial class Player : MonoBehaviour {
 
     private new Transform transform;
-    private PlayerSpeed speed;
 
-    public Sprite uiImage;
+    private Hp_UI hpUi;
     private Skill_UI skillUi;
 
-    private ParticleSystem.MainModule particle;
     private Coroutine runningCoroutine;
 
-    private Vector3 myPos;
-    private uint mySpeed;
-
+    public Sprite skillImage;
     public float skillCoolTime;
     private bool bCanUseSkill;
 
+    private Vector3 myPos;
+
     protected virtual void Awake() {
-        speed = GetComponent<PlayerSpeed>();
-        speed.SpeedEvent = (speed) => mySpeed = speed;
+        transform = base.transform;
 
-        transform = gameObject.transform;
+        hpUi = GameObject.FindWithTag("Hp Ui").GetComponent<Hp_UI>();
 
-        GameObject skillObj = GameObject.FindWithTag("Skill Ui");
+        skillUi = GameObject.FindWithTag("Skill Ui").GetComponent<Skill_UI>();
+        skillUi.SetSkillImage(skillImage);
 
-        skillUi = skillObj.GetComponent<Skill_UI>();
-
-        skillObj.transform.parent.GetComponent<Image>().sprite = uiImage;
-        skillObj.GetComponent<Image>().sprite = uiImage;
-
-        particle = transform.Find("Fire").GetComponent<ParticleSystem>().main;
         myPos = transform.position;
+
+        hp = 1f;
+        bAlive = true;
     }
 
     private void Start() {
         StartCoroutine(CoolTime());
-        skillUi.UpdateUI(skillCoolTime);
+
+        StartCoroutine(UpdateSpeed());
+        StartCoroutine(UpdateHp());
     }
 
     public void Move(Vector3 newPos) {
@@ -52,39 +49,31 @@ public class Player : MonoBehaviour {
 
     private IEnumerator Moving() {
         while (!Mathf.Approximately(transform.position.x, myPos.x)) {
-            transform.position = Vector3.Lerp(transform.position, myPos, Time.deltaTime * mySpeed * 0.01f);
+            transform.position = Vector3.Lerp(transform.position, myPos, Time.deltaTime * speed * 0.01f);
             yield return null;
         }
 
         transform.position = myPos;
     }
 
+    public virtual void Collision() {
+        ChangeSpeed(speed - GetCollisionSpeed());
+    }
+
     public virtual void UseSkill() {
-        skillUi.UpdateUI(skillCoolTime);
         StartCoroutine(CoolTime());
     }
 
     private IEnumerator CoolTime() {
+        skillUi.UpdateUI(skillCoolTime);
+
         bCanUseSkill = false;
         yield return CoroutineStorage.WaitForSeconds(skillCoolTime);
         bCanUseSkill = true;
     }
 
-    public virtual void Collision() {
-        speed.DecreaseSpeed();
-    }
-
-    // 파티클과 사운드 제어
-    private void LateUpdate() {
-        particle.startSpeed = -(mySpeed * 0.001f);
-    }
-
     public Vector3 Position {
         get { return myPos; }
-    }
-
-    protected uint MySpeed {
-        get { return mySpeed; }
     }
 
     protected bool CanUseSkill {

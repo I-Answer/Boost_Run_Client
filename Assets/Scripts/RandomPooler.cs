@@ -11,10 +11,10 @@ public abstract class RandomPooler : MonoBehaviour {
     private List<FieldObject> unusedObject;
     private List<Vector3> appearXPos;
 
-    private uint playerSpeed;
+    private int playerSpeed;
 
     protected virtual void Awake() {
-        GameObject.FindWithTag("Player").GetComponent<PlayerSpeed>().SpeedEvent = (speed) => playerSpeed = speed;
+
 
         unusedObject = new List<FieldObject>();
 
@@ -30,6 +30,8 @@ public abstract class RandomPooler : MonoBehaviour {
     }
 
     private IEnumerator Start() {
+        GameObject.FindWithTag("Player").GetComponent<Player>().SpeedEvent = (speed) => playerSpeed = speed;
+
         while (true) {
             yield return CoroutineStorage.WaitForSeconds(GetWaitTime());
 

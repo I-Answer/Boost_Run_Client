@@ -3,7 +3,6 @@
 public class GreenPlayer : Player {
 
     public float invincibleTime;
-
     private bool bInvincibility;
 
     public override void UseSkill() {

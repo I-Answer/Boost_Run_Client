@@ -2,15 +2,17 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerSpeed : MonoBehaviour {
+public partial class Player : MonoBehaviour {
 
-    private uint speed, increaseScale = 1;
+    private int speed = 0;
 
-    public uint startSpeed, increaseSpeed, decreaseSpeed;
+    public int startSpeed, increaseSpeed, decreaseSpeed;
     public float increaseTime;
 
+    private int increaseScale = 1;
+
     // increaseTime마다 increaseSpeed만큼 속도 증가
-    private IEnumerator Start() {
+    private IEnumerator UpdateSpeed() {
         ChangeSpeed(startSpeed);
 
         while (true) {
@@ -20,29 +22,24 @@ public class PlayerSpeed : MonoBehaviour {
         }
     }
 
-    // 장애물 맞으면 속도 감소
-    public void DecreaseSpeed() {
-        ChangeSpeed(speed - GetCollisionSpeed());
+    private int GetCollisionSpeed() {
+        return (speed >> 2) + decreaseSpeed;
     }
 
-    private uint GetCollisionSpeed() {
-        uint result = (speed >> 2) + decreaseSpeed;
-
-        return result;
-    }
+    #region SpeedEvent
 
     private SpeedEvent ChangeSpeedEvent;
 
-    public void ChangeSpeed(uint speed) {
+    public void ChangeSpeed(int speed) {
         if (speed < 0) speed = 0;
 
-        if (this.speed != speed)
-            this.speed = speed;
+        if (this.speed == speed) return;
 
+        this.speed = speed;
         ChangeSpeedEvent.Invoke(this.speed);
     }
 
-    public UnityAction<uint> SpeedEvent {
+    public UnityAction<int> SpeedEvent {
         set {
             if (ChangeSpeedEvent == null)
                 ChangeSpeedEvent = new SpeedEvent();
@@ -51,7 +48,13 @@ public class PlayerSpeed : MonoBehaviour {
         }
     }
 
-    public uint IncreaseScale {
+    #endregion
+
+    protected int Speed {
+        get { return speed; }
+    }
+
+    public int IncreaseScale {
         get { return increaseScale; }
         set { increaseScale = value; }
     }

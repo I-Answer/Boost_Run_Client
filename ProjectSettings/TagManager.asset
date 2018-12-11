@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Manager
-  - Hp Bar
-  - Shield Bar
-  - Asteroid
+  - Hp Ui
   - Skill Ui
+  - Game Over Ui
+  - Manager
+  - Asteroid
   layers:
   - Default
   - TransparentFX

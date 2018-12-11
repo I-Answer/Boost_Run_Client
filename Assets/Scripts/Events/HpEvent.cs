@@ -1,4 +1,4 @@
 ﻿using UnityEngine.Events;
 
 [System.Serializable]
-public class SpeedEvent : UnityEvent<uint> {}
+public class HpEvent : UnityEvent<float> { }

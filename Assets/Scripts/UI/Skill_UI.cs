@@ -5,18 +5,28 @@ using UnityEngine.EventSystems;
 
 public class Skill_UI : MonoBehaviour, IPointerDownHandler {
 
-    private Image myImage;
+    private Image myImage, backgroundImage;
     private Player player;
+
+    private float inverseCooltime = 0f;
 
     private void Awake() {
         myImage = GetComponent<Image>();
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+        backgroundImage = transform.parent.GetComponent<Image>();
+
+        
     }
 
 #if UNITY_EDITOR
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space))
-            player.UseSkill();
+    private IEnumerator Start() {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+        while (true) {
+            if (Input.GetKeyDown(KeyCode.Space))
+                player.UseSkill();
+
+            yield return null;
+        }
     }
 #endif
 
@@ -29,13 +39,18 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler {
     }
 
     private IEnumerator FillUI(float coolTime) {
-        float inverseCoolTime = 1f / coolTime;
+        if (inverseCooltime == 0f)
+            inverseCooltime = 1f / coolTime;
 
         for (float nowGage = 0f; nowGage <= coolTime; nowGage += Time.deltaTime) {
-            myImage.fillAmount = nowGage * inverseCoolTime;
+            myImage.fillAmount = nowGage * inverseCooltime;
             yield return null;
         }
 
         myImage.fillAmount = 1f;
+    }
+
+    public void SetSkillImage(Sprite image) {
+        myImage.sprite = backgroundImage.sprite = image;
     }
 }

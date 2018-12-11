@@ -5,20 +5,11 @@ using UnityEngine.UI;
 
 public class GameOver_UI : MonoBehaviour {
 
-    private static GameOver_UI instance;
-
-    public static GameOver_UI Instance {
-        get { return instance; }
-    }
-
     private List<string> eventString;
 
     public Text maxSpeedText, endureTimeText, eventText;
 
     private void Awake() {
-        if (instance == null)
-            instance = this;
-
         eventString = new List<string>();
 
         eventString.Add("");
@@ -29,7 +20,7 @@ public class GameOver_UI : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void Active(uint maxSpeed, uint endureTime, byte maxEvent) {
+    public void Active(int maxSpeed, int endureTime, byte maxEvent) {
         maxSpeedText.text = string.Format("{0} km/h", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
 
@@ -41,7 +32,7 @@ public class GameOver_UI : MonoBehaviour {
     public void LoadHome() {
         // TODO: 서버에 점수 보내는 행동
 
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         SceneManager.SceneLoad("HomeScene");
     }
 }

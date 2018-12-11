@@ -9,7 +9,7 @@ public abstract class FieldObject : MonoBehaviour {
     private Player player;
     private Vector3 moveVec;
 
-    private uint playerSpeed;
+    private int playerSpeed;
     private float playerPos;
 
     private bool bCollision;
@@ -21,16 +21,17 @@ public abstract class FieldObject : MonoBehaviour {
     protected abstract void OnCollision();
 
     protected virtual void Awake() {
-        GameObject playerObj = GameObject.FindWithTag("Player");
-        player = playerObj.GetComponent<Player>();
-
-        playerObj.GetComponent<PlayerSpeed>().SpeedEvent = (newSpeed) => playerSpeed = newSpeed;
-        playerPos = player.Position.z;
-
         gameObject = base.gameObject;
         transform = base.transform;
 
         moveVec = Vector3.zero;
+    }
+
+    private void Start() {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+        player.SpeedEvent = (newSpeed) => playerSpeed = newSpeed;
+        playerPos = player.Position.z;
 
         gameObject.SetActive(false);
     }

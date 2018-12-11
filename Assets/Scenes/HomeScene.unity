@@ -1367,9 +1367,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 942496154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d389a8f90b21a949a5b96010b5f225e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c410f57162690444922541908390233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spaceShipList:
+  - {fileID: 1077652522131750, guid: 3c11cde37e9a5364cb6a7d95cc5d14f4, type: 2}
+  - {fileID: 1369904477405156, guid: 77904436678759245b1fce34d66946fd, type: 2}
+  - {fileID: 1646714618455718, guid: 0b508148217d33842abdc53f7cfae7d2, type: 2}
+  - {fileID: 1439365958636920, guid: 10acff5420c90bf40a37a1afdb18d885, type: 2}
+  - {fileID: 1090108110770290, guid: 4070e450d359bce4286feafefacdedab, type: 2}
+  - {fileID: 1241661665347538, guid: 576092f9737a85d4aaa210dad51c8177, type: 2}
 --- !u!1 &963117016
 GameObject:
   m_ObjectHideFlags: 0
