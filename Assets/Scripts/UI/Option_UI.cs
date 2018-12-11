@@ -18,7 +18,6 @@ public class Option_UI : MonoBehaviour {
 
     public void SoundChange() {
         GameManager.SoundManager sound = GameManager.Sound;
-
         if (sound.Volume.Equals(0f))
             sound.Volume = 1f;
 
