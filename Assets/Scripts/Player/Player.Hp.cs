@@ -20,7 +20,7 @@ public partial class Player : MonoBehaviour {
             Hp -= decreaseHp;
         }
 
-        GameManager.GameOver();
+        manager.GameOver();
     }
 
     public float Hp {

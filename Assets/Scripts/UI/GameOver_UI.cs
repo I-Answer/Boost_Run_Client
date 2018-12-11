@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,15 @@ public class GameOver_UI : MonoBehaviour {
 
     public Text maxSpeedText, endureTimeText, eventText;
 
+    private static GameObject instance;
+
+    private static int maxSpeed;
+    private static int endureTime;
+    private static byte maxEvent;
+
     private void Awake() {
+        instance = gameObject;
+
         eventString = new List<string>();
 
         eventString.Add("");
@@ -20,13 +27,18 @@ public class GameOver_UI : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void Active(int maxSpeed, int endureTime, byte maxEvent) {
+    public void OnEnable() {
         maxSpeedText.text = string.Format("{0} km/h", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
-
         eventText.text = eventString[maxEvent];
+    }
 
-        gameObject.SetActive(true);
+    public static void Active(int maxSpeedParam, int endureTimeParam, byte maxEventParam) {
+        maxSpeed = maxSpeedParam;
+        endureTime = endureTimeParam;
+        maxEvent = maxEventParam;
+
+        instance.SetActive(true);
     }
 
     public void LoadHome() {

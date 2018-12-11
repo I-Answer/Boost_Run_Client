@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
+public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float>, IPlayerConnect {
 
     private Image myImage, backgroundImage;
     private Player player;
@@ -15,12 +15,16 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
         backgroundImage = transform.parent.GetComponent<Image>();
     }
 
+    public void PlayerConnect(Player player) {
+        this.player = player;
+    }
+
 #if UNITY_EDITOR
 
     private IEnumerator Start() {
         while (true) {
             if (Input.GetKeyDown(KeyCode.Space))
-                GameManager.Player.UseSkill();
+                player.UseSkill();
 
             yield return null;
         }
@@ -29,7 +33,7 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
 #endif
 
     public void OnPointerDown(PointerEventData ped) {
-        GameManager.Player.UseSkill();
+        player.UseSkill();
     }
 
     public void UpdateUi(float coolTime) {
@@ -46,7 +50,6 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
         }
 
         myImage.fillAmount = 1f;
-        //test
     }
 
     public void SetSkillImage(Sprite image) {

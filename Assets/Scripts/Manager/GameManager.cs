@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour {
     private readonly Quaternion spawnRot;
     private readonly Vector3 spawnScale;
 
-    private static Player player;
+    private int maxSpeed;
+    private int endureTime;
+
+    private float startTime;
 
     public GameManager() {
         spawnPos = new Vector3(0f, 8f, 0f);
@@ -17,10 +20,27 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Awake() {
-        player = MakePlayer().GetComponent<Player>();
+        ConnectPlayer(MakePlayer().GetComponent<Player>());
+
+        maxSpeed = endureTime = 0;
+        startTime = Time.time;
+    }
+
+    public void GameOver() {
+        Time.timeScale = 0f;
+
+        endureTime = (int)(Time.time - startTime);
+
+        GameOver_UI.Active(maxSpeed, endureTime, GetChangeEventFlag());
+    }
+
+    public void UpdateMaxSpeed(int nowSpeed) {
+        maxSpeed = Mathf.Max(maxSpeed, nowSpeed);
     }
 
     private GameObject MakePlayer() {
+        Debug.Log(UserInfo.SelectSpaceShip);
+
         GameObject playerObj = Instantiate(spaceShipList[UserInfo.SelectSpaceShip]);
 
         playerObj.transform.position = spawnPos;
@@ -29,12 +49,23 @@ public class GameManager : MonoBehaviour {
 
         return playerObj;
     }
+    
+    private void ConnectPlayer(Player player) {
+        foreach (MonoBehaviour obj in FindObjectsOfType(typeof(MonoBehaviour))) {
 
-    public static void GameOver() {
-
+            if (obj is IPlayerConnect) (obj as IPlayerConnect).PlayerConnect(player);
+        }
     }
 
-    public static Player Player {
-        get { return player; }
+    private byte GetChangeEventFlag() {
+        byte result = 0;
+
+        if (UserInfo.CompareMaxSpeed(maxSpeed))
+            result |= 0x01;
+
+        if (UserInfo.ComapreEndureTime(endureTime))
+            result |= 0x02;
+
+        return result;
     }
 }

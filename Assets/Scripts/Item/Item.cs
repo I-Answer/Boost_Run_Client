@@ -1,6 +1,8 @@
-﻿public class Item : FieldObject {
+﻿using UnityEngine;
+
+public class Item : FieldObject {
 
     protected override void OnCollision() {
-        //UnityEngine.Debug.Log("Get Item");
+        Debug.Log("Get Item");
     }
 }

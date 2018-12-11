@@ -5,6 +5,8 @@ public partial class Player : MonoBehaviour {
 
     private new Transform transform;
 
+    private GameManager manager;
+
     private Hp_UI hpUi;
     private Speed_UI speedUi;
     private Skill_UI skillUi;
@@ -20,6 +22,8 @@ public partial class Player : MonoBehaviour {
     private void Awake() {
         transform = base.transform;
 
+        manager = GameObject.FindWithTag("Manager").GetComponent<GameManager>();
+        
         hpUi = GameObject.FindWithTag("Hp Ui").GetComponent<Hp_UI>();
         speedUi = GameObject.FindWithTag("Speed Ui").GetComponent<Speed_UI>();
 

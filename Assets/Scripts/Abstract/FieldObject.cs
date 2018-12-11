@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class FieldObject : MonoBehaviour {
+public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
 
     private new GameObject gameObject;
     private new Transform transform;
 
+    private Player player;
     private Vector3 moveVec;
 
     private int playerSpeed;
@@ -18,7 +19,10 @@ public abstract class FieldObject : MonoBehaviour {
         transform = base.transform;
 
         moveVec = Vector3.zero;
+    }
 
+    public void PlayerConnect(Player player) {
+        this.player = player;
         gameObject.SetActive(false);
     }
 
@@ -33,7 +37,7 @@ public abstract class FieldObject : MonoBehaviour {
 
     private IEnumerator Move(System.Action<FieldObject> Arrange) {
         while (transform.localPosition.z > 0f) {
-            moveVec.z = GameManager.Player.Speed * 0.4f * Time.deltaTime;
+            moveVec.z = player.Speed * 0.4f * Time.deltaTime;
             transform.position -= moveVec;
 
             if (IsCollision())
@@ -47,10 +51,14 @@ public abstract class FieldObject : MonoBehaviour {
     }
 
     private bool IsCollision() {
-        if (bCollision || transform.position.z > GameManager.Player.Position.z) return false;
+        if (bCollision || transform.position.z > player.Position.z) return false;
 
         bCollision = true;
 
-        return Mathf.Approximately(GameManager.Player.Position.x, transform.position.x);
+        return Mathf.Approximately(player.Position.x, transform.position.x);
+    }
+
+    protected Player Player {
+        get { return player; }
     }
 }

@@ -30,6 +30,8 @@ public partial class Player : MonoBehaviour {
             if (value < 0) value = 0;
 
             speed = value;
+
+            manager.UpdateMaxSpeed(speed);
             speedUi.UpdateUi(speed);
         }
     }

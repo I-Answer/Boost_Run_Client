@@ -5,11 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Hp Ui
+  - Speed Ui
   - Skill Ui
   - Game Over Ui
   - Manager
-  - Asteroid
-  - Speed Ui
   layers:
   - Default
   - TransparentFX
