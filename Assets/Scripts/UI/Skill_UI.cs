@@ -13,8 +13,6 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler {
     private void Awake() {
         myImage = GetComponent<Image>();
         backgroundImage = transform.parent.GetComponent<Image>();
-
-        
     }
 
 #if UNITY_EDITOR

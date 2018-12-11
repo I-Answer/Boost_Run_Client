@@ -12,7 +12,7 @@ public partial class GameManager : MonoBehaviour {
         private readonly Quaternion spawnRot;
         private readonly Vector3 spawnScale;
 
-        private GameObject playerObj;
+        private Player player;
 
         private float startTime;
         private int maxSpeed;
@@ -25,18 +25,20 @@ public partial class GameManager : MonoBehaviour {
 
         public void Init() {
             MakePlayer();
-            playerObj.GetComponent<Player>().SpeedEvent = CompareSpeed;
+            player.SpeedEvent = CompareSpeed;
 
             maxSpeed = 0;
             startTime = Time.time;
         }
 
         private void MakePlayer() {
-            playerObj = Instantiate(instance.spaceShipList[User.SelectSpaceShip]);
+            GameObject playerObj = Instantiate(instance.spaceShipList[User.SelectSpaceShip]);
 
             playerObj.transform.position = spawnPos;
             playerObj.transform.rotation = spawnRot;
             playerObj.transform.localScale = spawnScale;
+
+            player = playerObj.GetComponent<Player>();
         }
 
         public void GameOver() {
@@ -62,6 +64,10 @@ public partial class GameManager : MonoBehaviour {
                 result |= 0x2;
 
             return result;
+        }
+
+        public Player Player {
+            get { return player; }
         }
     }
 }
