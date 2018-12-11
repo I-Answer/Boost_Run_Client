@@ -14,8 +14,8 @@ public class YellowPlayer : Player {
     }
 
     private IEnumerator LoanSpeed() {
-        ChangeSpeed(Speed + loanSpeed);
+        Speed += loanSpeed;
         yield return CoroutineStorage.WaitForSeconds(loanTime);
-        ChangeSpeed(Speed - loanSpeed);
+        Speed -= loanSpeed;
     }
 }

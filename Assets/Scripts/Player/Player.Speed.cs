@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public partial class Player : MonoBehaviour {
 
-    private int speed = 0;
+    private int speed;
 
     public int startSpeed, increaseSpeed, decreaseSpeed;
     public float increaseTime;
@@ -13,45 +12,26 @@ public partial class Player : MonoBehaviour {
 
     // increaseTime마다 increaseSpeed만큼 속도 증가
     private IEnumerator UpdateSpeed() {
-        ChangeSpeed(startSpeed);
+        Speed = startSpeed;
 
         while (true) {
             yield return CoroutineStorage.WaitForSeconds(increaseTime);
-
-            ChangeSpeed(speed + (increaseSpeed * increaseScale));
+            Speed += increaseSpeed * increaseScale;
         }
     }
 
     private int GetCollisionSpeed() {
-        return (speed >> 2) + decreaseSpeed;
+        return (Speed >> 2) + decreaseSpeed;
     }
 
-    #region SpeedEvent
-
-    private SpeedEvent ChangeSpeedEvent;
-
-    public void ChangeSpeed(int speed) {
-        if (speed < 0) speed = 0;
-
-        if (this.speed == speed) return;
-
-        this.speed = speed;
-        ChangeSpeedEvent.Invoke(this.speed);
-    }
-
-    public UnityAction<int> SpeedEvent {
-        set {
-            if (ChangeSpeedEvent == null)
-                ChangeSpeedEvent = new SpeedEvent();
-
-            ChangeSpeedEvent.AddListener(value);
-        }
-    }
-
-    #endregion
-
-    protected int Speed {
+    public int Speed {
         get { return speed; }
+        set {
+            if (value < 0) value = 0;
+
+            speed = value;
+            speedUi.UpdateUi(speed);
+        }
     }
 
     public int IncreaseScale {

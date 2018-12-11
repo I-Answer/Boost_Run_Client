@@ -24,7 +24,7 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void Buy(string spaceShipName) {
-        GameManager.User.BuySpaceShip(spaceShipMap[spaceShipName]);
+        UserInfo.BuySpaceShip(spaceShipMap[spaceShipName]);
     }
 
     public void OpenAlign() {

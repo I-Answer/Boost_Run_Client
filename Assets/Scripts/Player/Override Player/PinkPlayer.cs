@@ -13,12 +13,12 @@
     }
 
     private void SpeedToHp() {
-        ChangeSpeed(Speed - changeSpeed);
-        ChangeHp(Hp + changeHp);
+        Speed -= changeSpeed;
+        Hp += changeHp;
     }
 
     private void HpToSpeed() {
-        ChangeSpeed(Speed + changeSpeed);
-        ChangeHp(Hp - changeHp);
+        Speed += changeSpeed;
+        Hp -= changeHp;
     }
 }

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Speed_UI : MonoBehaviour {
+public class Speed_UI : MonoBehaviour, IPlayerUi<int> {
 
     private Text speedText;
 
-    private Coroutine runningCoroutine = null;
-
     private Dictionary<int, string> speedMap;
+    private Coroutine runningCoroutine = null;
 
     private string speedString;
     private int nowSpeed;
@@ -23,12 +22,8 @@ public class Speed_UI : MonoBehaviour {
             speedMap.Add(i, string.Format("{0} km/h", i));
     }
 
-    private void Start() {
-        GameObject.FindWithTag("Player").GetComponent<Player>().SpeedEvent = Change;
-    }
-
     // 현재 변경 중일 경우 변경을 중단하고 새로운 값으로 변경
-    private void Change(int newSpeed) {
+    public void UpdateUi(int newSpeed) {
         SetTextColor(newSpeed);
 
         if (runningCoroutine != null)

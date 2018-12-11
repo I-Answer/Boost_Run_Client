@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
 
     private new Transform transform;
 
     private Hp_UI hpUi;
+    private Speed_UI speedUi;
     private Skill_UI skillUi;
 
     private Coroutine runningCoroutine;
@@ -17,10 +17,11 @@ public partial class Player : MonoBehaviour {
 
     private Vector3 myPos;
 
-    protected virtual void Awake() {
+    private void Awake() {
         transform = base.transform;
 
         hpUi = GameObject.FindWithTag("Hp Ui").GetComponent<Hp_UI>();
+        speedUi = GameObject.FindWithTag("Speed Ui").GetComponent<Speed_UI>();
 
         skillUi = GameObject.FindWithTag("Skill Ui").GetComponent<Skill_UI>();
         skillUi.SetSkillImage(skillImage);
@@ -57,7 +58,7 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
-        ChangeSpeed(speed - GetCollisionSpeed());
+        Speed -= GetCollisionSpeed();
     }
 
     public virtual void UseSkill() {
@@ -65,7 +66,7 @@ public partial class Player : MonoBehaviour {
     }
 
     private IEnumerator CoolTime() {
-        skillUi.UpdateUI(skillCoolTime);
+        skillUi.UpdateUi(skillCoolTime);
 
         bCanUseSkill = false;
         yield return CoroutineStorage.WaitForSeconds(skillCoolTime);

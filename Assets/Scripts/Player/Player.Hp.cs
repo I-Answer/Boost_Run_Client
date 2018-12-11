@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public partial class Player : MonoBehaviour {
 
@@ -18,27 +17,22 @@ public partial class Player : MonoBehaviour {
             yield return waitBelowDecreaseBaseSpeed;
             yield return CoroutineStorage.WaitForSeconds(decreaseTime);
 
-            ChangeHp(hp - decreaseHp);
+            Hp -= decreaseHp;
         }
 
-        GameManager.InGame.GameOver();
-    }
-
-    public void IncreaseSpeed(float increaseHp) {
-        ChangeHp(hp + increaseHp);
-    }
-
-    public void ChangeHp(float newHp) {
-        if (newHp <= 0f) {
-            bAlive = false;
-            newHp = 0f;
-        }
-
-        hp = newHp;
-        hpUi.SetHp(hp);
+        GameManager.GameOver();
     }
 
     public float Hp {
         get { return hp; }
+        set {
+            if (value <= 0f) {
+                bAlive = false;
+                value = 0f;
+            }
+
+            hp = value;
+            hpUi.UpdateUi(hp);
+        }
     }
 }

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class RedPlayer : Player {
+﻿public class RedPlayer : Player {
 
     public float increaseHp;
 
@@ -11,6 +7,6 @@ public class RedPlayer : Player {
 
         base.UseSkill();
 
-        ChangeHp(Hp + increaseHp);
+        Hp += increaseHp;
     }
 }

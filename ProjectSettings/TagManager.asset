@@ -9,6 +9,7 @@ TagManager:
   - Game Over Ui
   - Manager
   - Asteroid
+  - Speed Ui
   layers:
   - Default
   - TransparentFX

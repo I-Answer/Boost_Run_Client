@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Skill_UI : MonoBehaviour, IPointerDownHandler {
+public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
 
     private Image myImage, backgroundImage;
     private Player player;
@@ -16,23 +16,23 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler {
     }
 
 #if UNITY_EDITOR
-    private IEnumerator Start() {
-        player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
+    private IEnumerator Start() {
         while (true) {
             if (Input.GetKeyDown(KeyCode.Space))
-                player.UseSkill();
+                GameManager.Player.UseSkill();
 
             yield return null;
         }
     }
+
 #endif
 
     public void OnPointerDown(PointerEventData ped) {
-        player.UseSkill();
+        GameManager.Player.UseSkill();
     }
 
-    public void UpdateUI(float coolTime) {
+    public void UpdateUi(float coolTime) {
         StartCoroutine(FillUI(coolTime));
     }
 
