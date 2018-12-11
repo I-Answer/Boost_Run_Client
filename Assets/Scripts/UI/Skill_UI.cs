@@ -46,6 +46,7 @@ public class Skill_UI : MonoBehaviour, IPointerDownHandler, IPlayerUi<float> {
         }
 
         myImage.fillAmount = 1f;
+        //test
     }
 
     public void SetSkillImage(Sprite image) {
