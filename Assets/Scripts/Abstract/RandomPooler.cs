@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class RandomPooler : MonoBehaviour {
+public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
 
     private readonly Vector3 appearZPos = new Vector3(0, 0, 600);
-
-    public float distance;
 
     private List<FieldObject> unusedObject;
     private List<Vector3> appearXPos;
 
-    private uint playerSpeed;
+    private Player player;
+    public float distance;
 
     protected virtual void Awake() {
-        GameObject.FindWithTag("Player").GetComponent<PlayerSpeed>().SpeedEvent = (speed) => playerSpeed = speed;
-
         unusedObject = new List<FieldObject>();
 
         for (int i = 0; i < transform.childCount; i++)
@@ -27,6 +24,10 @@ public abstract class RandomPooler : MonoBehaviour {
 
         for (temp.x = -10; temp.x <= 10; temp.x += 10)
             appearXPos.Add(temp);
+    }
+
+    public void PlayerConnect(Player player) {
+        this.player = player;
     }
 
     private IEnumerator Start() {
@@ -61,8 +62,8 @@ public abstract class RandomPooler : MonoBehaviour {
     }
 
     private float GetWaitTime() {
-        if (Mathf.Approximately(playerSpeed, 0)) return 0.1f;
+        if (player.Speed == 0) return 0.1f;
 
-        return distance / playerSpeed;
+        return distance / player.Speed;
     }
 }

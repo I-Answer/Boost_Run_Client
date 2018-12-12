@@ -1,26 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿public class PurplePlayer : Player {
 
-public class PurplePlayer : Player {
-
-    private PlayerSpeed playerSpeed;
-    public uint boostScale;
-
+    public int boostScale;
     private bool bBoost;
-
-    protected override void Awake() {
-        base.Awake();
-
-        playerSpeed = GetComponent<PlayerSpeed>();
-    }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
 
         base.UseSkill();
         
-        playerSpeed.IncreaseScale *= boostScale;
+        IncreaseScale *= boostScale;
         bBoost = true;
     }
 
@@ -28,7 +16,7 @@ public class PurplePlayer : Player {
         base.Collision();
 
         if (bBoost) {
-            playerSpeed.IncreaseScale = 1;
+            IncreaseScale = 1;
             bBoost = false;
         }
     }

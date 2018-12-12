@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HPItem : FieldObject {
+public class SpeedItem : FieldObject {
+
+    public int increaseSpeed;
     protected override void OnCollision()
     {
-
+        Player.Speed += increaseSpeed;
     }
 }

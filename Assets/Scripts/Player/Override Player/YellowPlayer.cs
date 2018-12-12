@@ -1,19 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class YellowPlayer : Player {
 
-    private PlayerSpeed playerSpeed;
-
-    public uint loanSpeed;
+    public int loanSpeed;
     public float loanTime;
-
-    protected override void Awake() {
-        base.Awake();
-
-        playerSpeed = GetComponent<PlayerSpeed>();
-    }
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
@@ -24,8 +14,8 @@ public class YellowPlayer : Player {
     }
 
     private IEnumerator LoanSpeed() {
-        playerSpeed.ChangeSpeed(MySpeed + loanSpeed);
+        Speed += loanSpeed;
         yield return CoroutineStorage.WaitForSeconds(loanTime);
-        playerSpeed.ChangeSpeed(MySpeed - loanSpeed);
+        Speed -= loanSpeed;
     }
 }
