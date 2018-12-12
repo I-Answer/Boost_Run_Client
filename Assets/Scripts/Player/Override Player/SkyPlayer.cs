@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SkyPlayer : Player {
+﻿public class SkyPlayer : Player {
 
     private int equipShieldCount = 0;
 
