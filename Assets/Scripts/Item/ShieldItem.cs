@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿public class ShieldItem : FieldObject {
 
-public class ShieldItem : FieldObject {
-    protected override void OnCollision()
-    {
+    protected override void OnCollision() {
         Player.Shield = true;
     }
 }
