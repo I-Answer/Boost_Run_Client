@@ -6,8 +6,6 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
     private new GameObject gameObject;
     private new Transform transform;
 
-    private RandomPooler pooler;
-
     private Player player;
     private Vector3 moveVec;
 
@@ -20,7 +18,6 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
         gameObject = base.gameObject;
         transform = base.transform;
 
-        pooler = transform.parent.GetComponent<RandomPooler>();
         moveVec = Vector3.zero;
     }
 
@@ -29,17 +26,17 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
         gameObject.SetActive(false);
     }
 
-    public virtual void Active(Vector3 appearPos) {
+    public virtual void Active(System.Action<FieldObject> Arrange, Vector3 appearPos) {
         gameObject.SetActive(true);
         transform.localPosition = appearPos;
 
         bCollision = false;
 
-        StartCoroutine(Move());
+        StartCoroutine(Move(Arrange));
     }
 
-    private IEnumerator Move() {
-        while (transform.localPosition.z > -10f) {
+    private IEnumerator Move(System.Action<FieldObject> Arrange) {
+        while (transform.localPosition.z > 0f) {
             moveVec.z = player.Speed * 0.4f * Time.deltaTime;
             transform.position -= moveVec;
 
@@ -49,7 +46,7 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
             yield return null;
         }
 
-        pooler.Arrange(this);
+        Arrange(this);
         gameObject.SetActive(false);
     }
 
