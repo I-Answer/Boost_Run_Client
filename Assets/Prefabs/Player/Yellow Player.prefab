@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionSound: {fileID: 8300000, guid: 204e9f6998fd5254b84cf6946cee3a4a, type: 3}
   skillImage: {fileID: 21300000, guid: 453cf25e6f89e3c4ca2a79bef082ba17, type: 3}
-  skillCoolTime: 5
+  skillCoolTime: 8
   decreaseHp: 0.1
   decreaseTime: 1
   startSpeed: 1800
@@ -105,5 +105,5 @@ MonoBehaviour:
   decreaseSpeed: 50
   increaseTime: 1
   warningSound: {fileID: 8300000, guid: 577d93e73cafd8f4f8c350ba015ee439, type: 3}
-  loanSpeed: 60
-  loanTime: 0.02
+  loanSpeed: 200
+  loanTime: 3

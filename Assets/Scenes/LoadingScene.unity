@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 2024664512}
-  homeImage: {fileID: 21300000, guid: 4f6615507ade0ab458bbd608f95bf589, type: 3}
-  stageImage: {fileID: 21300000, guid: 7dc0c73abe2a171489860ce1a4fd7823, type: 3}
+  homeImage: {fileID: 21300000, guid: 5e9c117e413373742ab28936d98a59b6, type: 3}
+  stageImage: {fileID: 21300000, guid: cb114212d7ba81b4c9f3ae0d98c3c844, type: 3}
   loadingBar: {fileID: 505948856}
 --- !u!1 &505948854
 GameObject:
@@ -632,7 +632,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6595ad7b17ab9604caf99a35a2bb230f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb114212d7ba81b4c9f3ae0d98c3c844, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
