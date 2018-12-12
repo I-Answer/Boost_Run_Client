@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Home_UI : MonoBehaviour {
 
-    public GameObject rank, align, shop, option;
-    public GameObject soundOn, soundOff;
-    public GameObject speedRank, timeRank;
+    public GameObject rank, repair, shop;
+
     private Dictionary<string, SpaceShipState> spaceShipMap;
 
     private void Awake() {
@@ -25,16 +23,20 @@ public class Home_UI : MonoBehaviour {
         SceneManager.SceneLoad("StageScene");
     }
 
-    public void Buy(string spaceShipName) {
-        UserInfo.BuySpaceShip(spaceShipMap[spaceShipName]);
+    public void OpenRank() {
+        rank.SetActive(true);
     }
 
-    public void OpenAlign() {
-        align.SetActive(true);
+    public void CloseRank() {
+        rank.SetActive(false);
     }
 
-    public void CloseAlign() {
-        align.SetActive(false);
+    public void OpenRepair() {
+        repair.SetActive(true);
+    }
+
+    public void CloseRepair() {
+        repair.SetActive(false);
     }
 
     public void OpenShop() {
@@ -45,42 +47,7 @@ public class Home_UI : MonoBehaviour {
         shop.SetActive(false);
     }
 
-    public void OpenOption()
-    {
-        option.SetActive(true);
-    }
-
-    public void CloseOption()
-    {
-        option.SetActive(false);
-    }
-
-    public void OpenRank()
-    {
-        rank.SetActive(true);
-    }
-
-    public void CloseRank()
-    {
-        rank.SetActive(false);
-    }
-
-    public void SoundChange()
-    {
-        GameManager.SoundManager sound = GameManager.Sound;
-
-        if(sound.Volume.Equals(0f))
-        {
-            sound.Volume = 1f;
-            soundOn.SetActive(true);
-            soundOff.SetActive(false);
-        }
-
-        else
-        {
-            sound.Volume = 0f;
-            soundOn.SetActive(false);
-            soundOff.SetActive(true);
-        }
+    public void Buy(string spaceShipName) {
+        UserManager.Player.BuySpaceShip(spaceShipMap[spaceShipName]);
     }
 }

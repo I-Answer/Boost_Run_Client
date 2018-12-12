@@ -13,15 +13,21 @@ public partial class Player : MonoBehaviour {
 
     private Coroutine runningCoroutine;
 
+    public AudioClip collisionSound;
+
     public Sprite skillImage;
     public float skillCoolTime;
     private bool bCanUseSkill;
 
     private Vector3 myPos;
 
+<<<<<<< HEAD
     private bool bShield;
 
     private void Awake() {
+=======
+    protected virtual void Awake() {
+>>>>>>> 0cea51c3e8a232d2459160d57e70ffc6a687aa7f
         transform = base.transform;
 
         manager = GameObject.FindWithTag("Manager").GetComponent<GameManager>();
@@ -64,10 +70,15 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
+<<<<<<< HEAD
         if (bShield)
             bShield = false;
         else
             Speed -= GetCollisionSpeed();
+=======
+        Speed -= GetCollisionSpeed();
+        SoundManager.PlaySound(collisionSound);
+>>>>>>> 0cea51c3e8a232d2459160d57e70ffc6a687aa7f
     }
 
     public virtual void UseSkill() {

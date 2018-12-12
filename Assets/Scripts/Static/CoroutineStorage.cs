@@ -4,28 +4,13 @@ using UnityEngine;
 public static class CoroutineStorage {
 
 	class FloatComparer : IEqualityComparer<float> {
-        bool IEqualityComparer<float>.Equals(float x, float y) {
-            return Mathf.Approximately(x, y);
+        bool IEqualityComparer<float>.Equals(float lhs, float rhs) {
+            return Mathf.Approximately(lhs, rhs);
         }
 
         int IEqualityComparer<float>.GetHashCode(float obj) {
             return obj.GetHashCode();
         }
-    }
-
-    private static readonly WaitForEndOfFrame waitForEndOfFrame
-        = new WaitForEndOfFrame();
-
-    public static WaitForEndOfFrame WaitForEndOfFrame() {
-        return waitForEndOfFrame;
-    }
-
-
-    private static readonly WaitForFixedUpdate waitForFixedUpdate
-        = new WaitForFixedUpdate();
-
-    public static WaitForFixedUpdate WaitForFixedUpdate() {
-        return waitForFixedUpdate;
     }
 
     private static readonly Dictionary<float, WaitForSeconds> waitForSeconds

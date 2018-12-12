@@ -6,28 +6,36 @@ public class Option_UI : MonoBehaviour {
 
     public GameObject optionWnd;
 
-	public void Active() {
-        Time.timeScale = 0f;
+    public GameObject soundOn, soundOff;
+
+	public void OpenOption() {
+        if (SceneManager.NowScene == SceneState.STAGE)
+            Time.timeScale = 0f;
+
         optionWnd.SetActive(true);
     }
 
-    public void Inactive() {
-        Time.timeScale = 1f;
+    public void CloseOption() {
+        if (SceneManager.NowScene == SceneState.STAGE)
+            Time.timeScale = 1f;
+
         optionWnd.SetActive(false);
     }
 
     public void SoundChange() {
-<<<<<<< HEAD
-        GameManager.SoundManager sound = GameManager.Sound;
-        if (sound.Volume.Equals(0f))
-            sound.Volume = 1f;
-
-        else sound.Volume = 0f;
-=======
-        if (SoundManager.Volume.Equals(0f))
+        if (SoundManager.Volume.Equals(0f)) {
+            SetSoundButton(true);
             SoundManager.Volume = 1f;
+        }
 
-        else SoundManager.Volume = 0f;
->>>>>>> 37f382c92ad6a786a83707d84775c06824a5072b
+        else {
+            SetSoundButton(false);
+            SoundManager.Volume = 0f;
+        }
+    }
+
+    private void SetSoundButton(bool bOn) {
+        soundOn.SetActive(bOn);
+        soundOff.SetActive(!bOn);
     }
 }

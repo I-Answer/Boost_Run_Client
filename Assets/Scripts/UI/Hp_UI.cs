@@ -1,19 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using UIHealthAlchemy;
 
-public class Hp_UI : MonoBehaviour, IPlayerUi<float> {
+public class Hp_UI : PowerBarMaterial, IPlayerUi<float> {
 
-    public Image hpBar, shiledBar;
-    
     public void UpdateUi(float hp) {
-        if (hp > 1f) {
-            hpBar.fillAmount = 1f;
-            shiledBar.fillAmount = hp - 1f;
-        }
-
-        else {
-            hpBar.fillAmount = hp;
-            shiledBar.fillAmount = 0f;
-        }
+        Value = hp;
     }
 }

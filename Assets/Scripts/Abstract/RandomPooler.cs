@@ -41,10 +41,10 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
     protected abstract void OnActivate();
 
     public void Request() {
-        GetRandomObject().Active(Arrange, GetRandomXPos() + appearZPos);
+        GetRandomObject().Active(GetRandomXPos() + appearZPos);
     }
 
-    private void Arrange(FieldObject obstacle) {
+    public void Arrange(FieldObject obstacle) {
         unusedObject.Add(obstacle);
     }
 
@@ -53,12 +53,9 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
     }
 
     private FieldObject GetRandomObject() {
-        int rand = Random.Range(0, unusedObject.Count);
-        FieldObject obj = unusedObject[rand];
-
-        unusedObject.RemoveAt(rand);
-
-        return obj;
+        FieldObject item = unusedObject[Random.Range(0, unusedObject.Count)];
+        unusedObject.Remove(item);
+        return item;
     }
 
     private float GetWaitTime() {

@@ -3,16 +3,21 @@ using UnityEngine;
 
 public partial class Player : MonoBehaviour {
 
+    const int warningBase = 1800;
+
     private int speed;
 
     public int startSpeed, increaseSpeed, decreaseSpeed;
     public float increaseTime;
+
+    public AudioClip warningSound;
 
     private int increaseScale = 1;
 
     // increaseTime마다 increaseSpeed만큼 속도 증가
     private IEnumerator UpdateSpeed() {
         Speed = startSpeed;
+        StartCoroutine(WarningCheck());
 
         while (true) {
             yield return CoroutineStorage.WaitForSeconds(increaseTime);
@@ -20,8 +25,19 @@ public partial class Player : MonoBehaviour {
         }
     }
 
+    private IEnumerator WarningCheck() {
+        WaitUntil waitBelowWarningBase = new WaitUntil(() => speed < warningBase);
+
+        while (true) {
+            yield return waitBelowWarningBase;
+
+            SoundManager.PlaySound(warningSound);
+            yield return CoroutineStorage.WaitForSeconds(2f);
+        }
+    }
+
     private int GetCollisionSpeed() {
-        return (Speed >> 2) + decreaseSpeed;
+        return (Speed / 5) + decreaseSpeed;
     }
 
     public int Speed {

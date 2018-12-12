@@ -17,7 +17,8 @@ public partial class Player : MonoBehaviour {
             yield return waitBelowDecreaseBaseSpeed;
             yield return CoroutineStorage.WaitForSeconds(decreaseTime);
 
-            Hp -= decreaseHp;
+            if (speed < decreaseBaseSpeed)
+                Hp -= decreaseHp;
         }
 
         manager.GameOver();
@@ -30,6 +31,8 @@ public partial class Player : MonoBehaviour {
                 bAlive = false;
                 value = 0f;
             }
+
+            else if (value > 1f) value = 1f;
 
             hp = value;
             hpUi.UpdateUi(hp);

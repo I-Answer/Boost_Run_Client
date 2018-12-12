@@ -28,7 +28,7 @@ public class GameOver_UI : MonoBehaviour {
     }
 
     public void OnEnable() {
-        maxSpeedText.text = string.Format("{0} km/h", maxSpeed);
+        maxSpeedText.text = string.Format("{0}", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
         eventText.text = eventString[maxEvent];
     }

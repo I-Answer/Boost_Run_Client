@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     private float startTime;
 
     public GameManager() {
-        spawnPos = new Vector3(0f, 8f, 0f);
+        spawnPos = new Vector3(0f, 8f, -5f);
         spawnRot = Quaternion.Euler(15f, 0f, 0f);
         spawnScale = new Vector3(2f, 2f, 2f);
     }
@@ -39,9 +39,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private GameObject MakePlayer() {
-        Debug.Log(UserInfo.SelectSpaceShip);
-
-        GameObject playerObj = Instantiate(spaceShipList[UserInfo.SelectSpaceShip]);
+        GameObject playerObj = Instantiate(spaceShipList[UserManager.SelectSpaceShip]);
 
         playerObj.transform.position = spawnPos;
         playerObj.transform.rotation = spawnRot;
@@ -60,10 +58,10 @@ public class GameManager : MonoBehaviour {
     private byte GetChangeEventFlag() {
         byte result = 0;
 
-        if (UserInfo.CompareMaxSpeed(maxSpeed))
+        if (UserManager.Player.CompareMaxSpeed(maxSpeed))
             result |= 0x01;
 
-        if (UserInfo.ComapreEndureTime(endureTime))
+        if (UserManager.Player.ComapreEndureTime(endureTime))
             result |= 0x02;
 
         return result;
