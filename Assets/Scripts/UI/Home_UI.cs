@@ -20,6 +20,7 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void Play() {
+        SoundManager.PlaySound(clickSound);
         SceneManager.SceneLoad("StageScene");
     }
 

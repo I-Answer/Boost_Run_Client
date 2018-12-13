@@ -1,4 +1,4 @@
-﻿[System.Flags]
+﻿/*[System.Flags]
 public enum SpaceShipState : byte {
     Red = 1, Yellow = 2, Green = 4, Sky = 8, Pink = 16, Purple = 32
 }
@@ -55,3 +55,4 @@ public class UserInfo {
         get { return spaceShipList; }
     }
 }
+*/

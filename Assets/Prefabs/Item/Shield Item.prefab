@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b9645b184cb4944a50a44b44357570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionSound: {fileID: 8300000, guid: 025aa80ce83394dbb984ac462d965da6, type: 3}

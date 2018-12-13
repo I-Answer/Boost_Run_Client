@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db349f75ae57e384d85b0dea464ba447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSound: {fileID: 8300000, guid: 204e9f6998fd5254b84cf6946cee3a4a, type: 3}
+  collisionSound: {fileID: 8300000, guid: 3c1de4fe05be44abe9dfc42da59d5269, type: 3}
   skillImage: {fileID: 21300000, guid: 453cf25e6f89e3c4ca2a79bef082ba17, type: 3}
   skillCoolTime: 8
   decreaseHp: 0.1
@@ -104,6 +104,6 @@ MonoBehaviour:
   increaseSpeed: 150
   decreaseSpeed: 50
   increaseTime: 1
-  warningSound: {fileID: 8300000, guid: 577d93e73cafd8f4f8c350ba015ee439, type: 3}
+  warningSound: {fileID: 8300000, guid: 71e886e8b4be141d0b60746c9afcfb50, type: 3}
   loanSpeed: 200
   loanTime: 3

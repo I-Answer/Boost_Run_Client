@@ -2748,4 +2748,4 @@ MonoBehaviour:
   optionWnd: {fileID: 363956409}
   soundOn: {fileID: 1659073296}
   soundOff: {fileID: 1237178843}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 1e6c356d5843c40c8a232158dc6af52a, type: 3}
