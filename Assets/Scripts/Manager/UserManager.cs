@@ -13,7 +13,7 @@ public class UserManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         instance = this;
 
-        ServerConnector.Instance.GET<UserAllInfo>(ServerApi.GetUser + "blasin", SetPlayer, ServerConnector.ThrowIfFailed);
+        ServerConnector.Instance.GET<UserAllInfo>(ServerApi.GetUser + "2", SetPlayer, ServerConnector.ThrowIfFailed);
     }
 
     private void SetPlayer(UserAllInfo[] user) {
