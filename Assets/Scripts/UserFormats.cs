@@ -1,14 +1,17 @@
-﻿[System.Flags]
+﻿using System;
+
+[Flags]
 public enum SpaceShipState : byte {
     Red = 1, Yellow = 2, Green = 4, Sky = 8, Pink = 16, Purple = 32
 }
 
+[Serializable]
 public class UserInfo {
 
-    private string name;
-    private int maxSpeed;
-    private int endureTime;
-    private SpaceShipState spaceShipList;
+    public string name;
+    public int maxSpeed;
+    public int endureTime;
+    public SpaceShipState spaceShipList;
 
     public UserInfo(string name, int maxSpeed, int endureTime, SpaceShipState spaceShipList) {
         this.name = name;
@@ -54,4 +57,11 @@ public class UserInfo {
     public SpaceShipState CarList {
         get { return spaceShipList; }
     }
+}
+
+[Serializable]
+public class IdUserSpeed {
+    public string id;
+    public string nick;
+    public int maxSpeed;
 }
