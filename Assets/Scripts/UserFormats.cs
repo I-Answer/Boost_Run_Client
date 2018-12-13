@@ -1,26 +1,24 @@
 ﻿using System;
 
-[Flags]
-public enum SpaceShipState : byte {
-    Red = 1, Yellow = 2, Green = 4, Sky = 8, Pink = 16, Purple = 32
+public enum SpaceShipList {
+    Red, Pink, Yellow, Green, Sky, Purple
 }
 
-[Serializable]
-public class UserInfo {
+public class RegalUser {
 
-    public string name;
-    public int maxSpeed;
-    public int endureTime;
-    public SpaceShipState spaceShipList;
+    private string name;
+    private int maxSpeed;
+    private int endureTime;
+    private int spaceShipList;
 
-    public UserInfo(string name, int maxSpeed, int endureTime, SpaceShipState spaceShipList) {
+    public RegalUser(string name, int maxSpeed, int endureTime, int spaceShipList) {
         this.name = name;
         this.maxSpeed = maxSpeed;
         this.endureTime = endureTime;
         this.spaceShipList = spaceShipList;
     }
 
-    public void BuySpaceShip(SpaceShipState buySpaceShip) {
+    public void BuySpaceShip(int buySpaceShip) {
         spaceShipList |= buySpaceShip;
     }
 
@@ -33,7 +31,7 @@ public class UserInfo {
         return false;
     }
 
-    public bool ComapreEndureTime(int nowEndureTime) {
+    public bool CompareEndureTime(int nowEndureTime) {
         if (nowEndureTime > endureTime) {
             endureTime = nowEndureTime;
             return true;
@@ -54,14 +52,56 @@ public class UserInfo {
         get { return endureTime; }
     }
 
-    public SpaceShipState CarList {
+    public int CarList {
         get { return spaceShipList; }
     }
 }
 
+
 [Serializable]
-public class IdUserSpeed {
+public class UserAllInfo {
+    public string id;
+    public string password;
+    public string nick;
+    public int bitflag;
+    public int maxSpeed;
+    public int maxTime;
+}
+
+[Serializable]
+public class UserSpeed {
     public string id;
     public string nick;
     public int maxSpeed;
+}
+
+[Serializable]
+public class UserTime {
+    public string id;
+    public string nick;
+    public int maxTime;
+}
+
+[Serializable]
+public class UserInfo {
+    public string id;
+    public string password;
+    public string nick;
+}
+
+[Serializable]
+public class UserSpaceship {
+    public string nick;
+    public int bitflag;
+}
+
+[Serializable]
+public class Record {
+    public int maxSpeed;
+    public int maxTime;
+}
+
+[Serializable]
+public class Result {
+    public bool success;
 }

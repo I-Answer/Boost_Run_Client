@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
     private int maxSpeed;
     private int endureTime;
+    private int bitflag;
 
     private float startTime;
 
@@ -28,16 +30,20 @@ public class GameManager : MonoBehaviour {
         startTime = Time.time;
     }
 
-    public void GameOver() {
-        Time.timeScale = 0f;
-
-        endureTime = (int)(Time.time - startTime);
-
-        GameOver_UI.Active(maxSpeed, endureTime, GetChangeEventFlag());
-    }
-
     public void UpdateMaxSpeed(int nowSpeed) {
         maxSpeed = Mathf.Max(maxSpeed, nowSpeed);
+    }
+
+    public void GameOver() {
+        Time.timeScale = 0f;
+        endureTime = (int)(Time.time - startTime);
+
+        var post = new Dictionary<string, string>();
+        post.Add("speed", maxSpeed.ToString());
+        post.Add("time", endureTime.ToString());
+        post.Add("nick", UserManager.Player.Name);
+
+        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, ActiveGameoverWindow, ServerConnector.ThrowIfFailed, post);
     }
 
     private GameObject MakePlayer() {
@@ -57,13 +63,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    private void ActiveGameoverWindow(Result[] result) {
+        GameOver_UI.Active(maxSpeed, endureTime, GetChangeEventFlag());
+    }
+
     private byte GetChangeEventFlag() {
         byte result = 0;
 
         if (UserManager.Player.CompareMaxSpeed(maxSpeed))
             result |= 0x01;
 
-        if (UserManager.Player.ComapreEndureTime(endureTime))
+        if (UserManager.Player.CompareEndureTime(endureTime))
             result |= 0x02;
 
         return result;

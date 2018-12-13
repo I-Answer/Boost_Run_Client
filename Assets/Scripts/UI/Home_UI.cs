@@ -1,23 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Home_UI : MonoBehaviour {
 
     public GameObject rank, repair, shop;
 
-    private Dictionary<string, SpaceShipState> spaceShipMap;
-
-    private void Awake() {
-        spaceShipMap = new Dictionary<string, SpaceShipState>();
-
-        spaceShipMap.Add("Red", SpaceShipState.Red);
-        spaceShipMap.Add("Sky", SpaceShipState.Sky);
-        spaceShipMap.Add("Pink", SpaceShipState.Pink);
-        spaceShipMap.Add("Green", SpaceShipState.Green);
-        spaceShipMap.Add("Yellow", SpaceShipState.Yellow);
-        spaceShipMap.Add("Purple", SpaceShipState.Purple);
-    }
+    public Image curImage;
+    public Sprite[] spaceShipImage;
 
     public void Play() {
         SceneManager.SceneLoad("StageScene");
@@ -47,7 +37,12 @@ public class Home_UI : MonoBehaviour {
         shop.SetActive(false);
     }
 
-    public void Buy(string spaceShipName) {
-        UserManager.Player.BuySpaceShip(spaceShipMap[spaceShipName]);
+    public void Select(int buyShip) {
+        if (UserManager.SelectNewSpaceShip(buyShip))
+            curImage.sprite = spaceShipImage[buyShip];
+    }
+
+    public void Buy(int buyShip) {
+        UserManager.Player.BuySpaceShip(1 << buyShip);
     }
 }
