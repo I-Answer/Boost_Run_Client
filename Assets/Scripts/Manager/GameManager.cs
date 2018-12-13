@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour {
 
     public GameObject[] spaceShipList;
 
+    public const float distance = 10f;
+
     private readonly Vector3 spawnPos;
     private readonly Quaternion spawnRot;
     private readonly Vector3 spawnScale;
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour {
 
         return playerObj;
     }
-    
+
     private void ConnectPlayer(Player player) {
         foreach (MonoBehaviour obj in FindObjectsOfType(typeof(MonoBehaviour))) {
 
