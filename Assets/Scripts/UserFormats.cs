@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public enum SpaceShipList {
     Red, Pink, Yellow, Green, Sky, Purple
@@ -18,8 +19,15 @@ public class RegalUser {
         this.spaceShipList = spaceShipList;
     }
 
-    public void BuySpaceShip(int buySpaceShip) {
+    public void BuySpaceShip(int buySpaceShip, Action<UserSpaceship[]> applyUi) {
+        if ((spaceShipList & buySpaceShip) != 0) return;
+
+        var bitflagMap = new Dictionary<string, string>();
+        bitflagMap.Add("nick", UserManager.Player.Name);
+        bitflagMap.Add("bitflag", buySpaceShip.ToString());
+
         spaceShipList |= buySpaceShip;
+        ServerConnector.Instance.POST(ServerApi.Bitflag, applyUi, ServerConnector.ThrowIfFailed, bitflagMap);
     }
 
     public bool CompareMaxSpeed(int nowSpeed) {
@@ -56,7 +64,6 @@ public class RegalUser {
         get { return spaceShipList; }
     }
 }
-
 
 [Serializable]
 public class UserAllInfo {

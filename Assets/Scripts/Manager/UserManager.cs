@@ -20,7 +20,7 @@ public class UserManager : MonoBehaviour {
         playerInfo = new RegalUser(user[0].nick, user[0].maxSpeed, user[0].maxTime, user[0].bitflag);
         selectIndex = PlayerPrefs.GetInt("SelectIndex", 0);
 
-        Debug.Log(playerInfo.Name);
+        Debug.Log(selectIndex);
     }
 
     public static RegalUser Player {
