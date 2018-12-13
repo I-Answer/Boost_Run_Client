@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BuyComplete_UI : MonoBehaviour {
 
-    private const float waitTime = 4f;
+    private const float waitTime = 1f;
 
     private void OnEnable() {
         StartCoroutine(WaitAndDisappear());
