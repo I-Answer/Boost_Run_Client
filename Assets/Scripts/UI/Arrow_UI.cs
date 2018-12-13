@@ -18,12 +18,20 @@ public class Arrow_UI : MonoBehaviour, IPointerDownHandler, IPlayerConnect {
 
     private void Awake() {
         myMoveVector = Vector3.zero;
-        myMoveVector.x = (int)direction * GameManager.distance;
+        myMoveVector.x = (float)direction * GameManager.distance;
+
+#if UNITY_EDITOR
+        if (direction.Equals(Direction.LEFT))
+            inputKey = KeyCode.LeftArrow;
+        else inputKey = KeyCode.RightArrow;
+#endif
     }
 
 #if UNITY_EDITOR
+    KeyCode inputKey;
+
     private void Update() {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (Input.GetKeyDown(inputKey))
             Move();
     }
 #endif
