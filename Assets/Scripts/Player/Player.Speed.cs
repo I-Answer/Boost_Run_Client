@@ -32,7 +32,7 @@ public partial class Player : MonoBehaviour {
             yield return waitBelowWarningBase;
 
             SoundManager.PlaySound(warningSound);
-            yield return CoroutineStorage.WaitForSeconds(2f);
+            yield return CoroutineStorage.WaitForSeconds(1f);
         }
     }
 

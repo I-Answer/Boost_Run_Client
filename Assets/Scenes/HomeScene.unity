@@ -2542,6 +2542,7 @@ MonoBehaviour:
   - repair: {fileID: 561002752}
     shop: {fileID: 102035602}
     sprite: {fileID: 21300000, guid: 2f43e29738626084693b60540f87089e, type: 3}
+  clickSound: {fileID: 8300000, guid: 1e6c356d5843c40c8a232158dc6af52a, type: 3}
 --- !u!114 &2054553894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2556,6 +2557,7 @@ MonoBehaviour:
   optionWnd: {fileID: 363956409}
   soundOn: {fileID: 1659073296}
   soundOff: {fileID: 1237178843}
+  clickSound: {fileID: 8300000, guid: 1e6c356d5843c40c8a232158dc6af52a, type: 3}
 --- !u!114 &2113779375 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114206136223592598, guid: e10dbce50d5d2f548b605ed050f69093,

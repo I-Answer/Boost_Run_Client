@@ -143,4 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09bf0d8a7faa404bb994ba68fa2516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getSound: {fileID: 8300000, guid: 025aa80ce83394dbb984ac462d965da6, type: 3}
   increaseSpeed: 0

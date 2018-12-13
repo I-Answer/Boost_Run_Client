@@ -8,10 +8,13 @@ public class Option_UI : MonoBehaviour {
 
     public GameObject soundOn, soundOff;
 
+    public AudioClip clickSound;
+
 	public void OpenOption() {
         if (SceneManager.NowScene == SceneState.STAGE)
             Time.timeScale = 0f;
 
+        SoundManager.PlaySound(clickSound);
         optionWnd.SetActive(true);
     }
 
@@ -19,6 +22,7 @@ public class Option_UI : MonoBehaviour {
         if (SceneManager.NowScene == SceneState.STAGE)
             Time.timeScale = 1f;
 
+        SoundManager.PlaySound(clickSound);
         optionWnd.SetActive(false);
     }
 

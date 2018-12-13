@@ -140,7 +140,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864138424766128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42b1a6bd2f34d984489608af33973fd6, type: 3}
+  m_Script: {fileID: 11500000, guid: e5bf5be732060224ab1f5eb063d4df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  getSound: {fileID: 8300000, guid: 025aa80ce83394dbb984ac462d965da6, type: 3}
   recoverHP: 0

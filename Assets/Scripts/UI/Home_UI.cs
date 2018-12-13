@@ -20,6 +20,8 @@ public class Home_UI : MonoBehaviour {
     public Image curImage;
     public Content[] spaceShipImage;
 
+    public AudioClip clickSound;
+
     private int newBuyShip;
 
     public Home_UI() {
@@ -46,30 +48,37 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void Play() {
+        SoundManager.PlaySound(clickSound);
         SceneManager.SceneLoad("StageScene");
     }
 
     public void OpenRank() {
+        SoundManager.PlaySound(clickSound);
         rank.SetActive(true);
     }
 
     public void CloseRank() {
+        SoundManager.PlaySound(clickSound);
         rank.SetActive(false);
     }
 
     public void OpenRepair() {
+        SoundManager.PlaySound(clickSound);
         repair.SetActive(true);
     }
 
     public void CloseRepair() {
+        SoundManager.PlaySound(clickSound);
         repair.SetActive(false);
     }
 
     public void OpenShop() {
+        SoundManager.PlaySound(clickSound);
         shop.SetActive(true);
     }
 
     public void CloseShop() {
+        SoundManager.PlaySound(clickSound);
         shop.SetActive(false);
     }
 

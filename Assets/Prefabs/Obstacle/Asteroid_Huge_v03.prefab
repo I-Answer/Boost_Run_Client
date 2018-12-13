@@ -669,6 +669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 198896214868281518}
+  collisionSound: {fileID: 8300000, guid: 95e838e0a30c748cb9d08f70fd02e578, type: 3}
 --- !u!198 &198168448762900900
 ParticleSystem:
   m_ObjectHideFlags: 1

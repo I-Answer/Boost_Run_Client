@@ -13,8 +13,6 @@ public partial class Player : MonoBehaviour {
 
     private Coroutine runningCoroutine;
 
-    public AudioClip collisionSound;
-
     public Sprite skillImage;
     public float skillCoolTime;
     private bool bCanUseSkill;
@@ -72,7 +70,6 @@ public partial class Player : MonoBehaviour {
             Speed -= GetCollisionSpeed();
 
         Speed -= GetCollisionSpeed();
-        SoundManager.PlaySound(collisionSound);
     }
 
     public virtual void UseSkill() {
