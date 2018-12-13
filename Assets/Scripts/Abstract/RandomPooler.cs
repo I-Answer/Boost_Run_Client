@@ -22,7 +22,7 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
 
         Vector3 temp = Vector3.zero;
 
-        for (temp.x = -10; temp.x <= 10; temp.x += 10)
+        for (temp.x = -GameManager.distance; temp.x <= GameManager.distance; temp.x += GameManager.distance)
             appearXPos.Add(temp);
     }
 
