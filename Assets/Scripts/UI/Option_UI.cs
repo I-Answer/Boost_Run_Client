@@ -1,12 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Option_UI : MonoBehaviour {
 
+    [System.Serializable]
+    public struct AudioButton {
+        public GameObject on, off;
+    }
+
     public GameObject optionWnd;
 
-    public GameObject soundOn, soundOff;
+    public AudioButton effect, background;
 
     public AudioClip clickSound;
 
@@ -22,24 +25,40 @@ public class Option_UI : MonoBehaviour {
         if (SceneManager.NowScene == SceneState.STAGE)
             Time.timeScale = 1f;
 
-        SoundManager.PlaySound(clickSound);
         optionWnd.SetActive(false);
     }
 
-    public void SoundChange() {
-        if (SoundManager.Volume.Equals(0f)) {
-            SetSoundButton(true);
-            SoundManager.Volume = 1f;
+    public void EffectSoundChange() {
+        if (SoundManager.EffectSound) {
+            SetEffectSoundButton(true);
+            SoundManager.EffectSound = false;
         }
 
         else {
-            SetSoundButton(false);
-            SoundManager.Volume = 0f;
+            SetEffectSoundButton(false);
+            SoundManager.EffectSound = true;
         }
     }
 
-    private void SetSoundButton(bool bOn) {
-        soundOn.SetActive(bOn);
-        soundOff.SetActive(!bOn);
+    public void BackgroundSoundChange() {
+        if (SoundManager.BackgroundSound) {
+            SetBackgroundSoundButton(true);
+            SoundManager.BackgroundSound = false;
+        }
+
+        else {
+            SetBackgroundSoundButton(false);
+            SoundManager.BackgroundSound = true;
+        }
+    }
+
+    private void SetEffectSoundButton(bool bOn) {
+        effect.on.SetActive(bOn);
+        effect.off.SetActive(!bOn);
+    }
+
+    private void SetBackgroundSoundButton(bool bOn) {
+        background.on.SetActive(bOn);
+        background.off.SetActive(!bOn);
     }
 }

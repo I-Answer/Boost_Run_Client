@@ -58,7 +58,6 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void CloseRank() {
-        SoundManager.PlaySound(clickSound);
         rank.SetActive(false);
     }
 
@@ -68,7 +67,6 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void CloseRepair() {
-        SoundManager.PlaySound(clickSound);
         repair.SetActive(false);
     }
 
@@ -78,7 +76,6 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void CloseShop() {
-        SoundManager.PlaySound(clickSound);
         shop.SetActive(false);
     }
 

@@ -3,7 +3,7 @@
 public class SoundManager : MonoBehaviour {
 
     private static SoundManager instance;
-    private new AudioSource audio;
+    private AudioSource effectAudio, backgroundAudio;
 
     public void Awake() {
         if (instance != null) return;
@@ -11,15 +11,25 @@ public class SoundManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         instance = this;
 
-        audio = GetComponent<AudioSource>();
+        AudioSource[] audios = GetComponents<AudioSource>();
+
+        foreach (var audio in audios) {
+            if (audio.loop) backgroundAudio = audio;
+            else effectAudio = audio;
+        }
     }
 
     public static void PlaySound(AudioClip playAudio) {
-        instance.audio.PlayOneShot(playAudio);
+        instance.effectAudio.PlayOneShot(playAudio);
     }
 
-    public static float Volume {
-        get { return instance.audio.volume; }
-        set { instance.audio.volume = value; }
+    public static bool EffectSound {
+        get { return instance.effectAudio.mute; }
+        set { instance.effectAudio.mute = value; }
+    }
+
+    public static bool BackgroundSound {
+        get { return instance.backgroundAudio.mute; }
+        set { instance.backgroundAudio.mute = value; }
     }
 }
