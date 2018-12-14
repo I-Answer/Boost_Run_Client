@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
         post.Add("time", endureTime.ToString());
         post.Add("nick", UserManager.Instance.Player.Name);
 
+        GameOver_UI.Instance.Active();
         ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, ActiveGameoverWindow, ServerConnector.ThrowIfFailed, post);
     }
 
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ActiveGameoverWindow(Result[] result) {
-        GameOver_UI.Active(maxSpeed, endureTime, GetChangeEventFlag());
+        GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
     }
 
     private byte GetChangeEventFlag() {

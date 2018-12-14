@@ -1,44 +1,34 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOver_UI : MonoBehaviour {
 
-    private List<string> eventString;
+    private string[] eventString = new string[] { "", "Highest speed!!", "Highest time!!", "Highest speed, time!!" };
 
+    public GameObject record, loading;
     public Text maxSpeedText, endureTimeText, eventText;
 
-    private static GameObject instance;
+    private static GameOver_UI instance;
 
-    private static int maxSpeed;
-    private static int endureTime;
-    private static byte maxEvent;
+    public static GameOver_UI Instance {
+        get { return instance; }
+    }
 
     private void Awake() {
-        instance = gameObject;
-
-        eventString = new List<string>();
-
-        eventString.Add("");
-        eventString.Add("최고 속도 달성!!");
-        eventString.Add("최고 시간 달성!!");
-        eventString.Add("최고 속도, 시간 달성!!");
-
+        instance = this;
         gameObject.SetActive(false);
     }
 
-    public void OnEnable() {
+    public void Active() {
+        RecordActive(false);
+    }
+
+    public void Active(int maxSpeed, int endureTime, byte maxEvent) {
         maxSpeedText.text = string.Format("{0}", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
         eventText.text = eventString[maxEvent];
-    }
 
-    public static void Active(int maxSpeedParam, int endureTimeParam, byte maxEventParam) {
-        maxSpeed = maxSpeedParam;
-        endureTime = endureTimeParam;
-        maxEvent = maxEventParam;
-
-        instance.SetActive(true);
+        RecordActive(true);
     }
 
     public void LoadHome() {
@@ -46,5 +36,13 @@ public class GameOver_UI : MonoBehaviour {
 
         Time.timeScale = 1f;
         SceneManager.SceneLoad("HomeScene");
+    }
+
+    private void RecordActive(bool bOn) {
+        record.SetActive(bOn);
+        loading.SetActive(!bOn);
+
+        if (!gameObject.activeInHierarchy)
+            gameObject.SetActive(true);
     }
 }

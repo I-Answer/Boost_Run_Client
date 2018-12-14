@@ -8,10 +8,16 @@ public class Login_UI : MonoBehaviour {
     public GameObject LoginWnd;
     public GameObject signInWnd, signUpWnd;
 
+    public Text titleText;
+
     public InputField signInId, signInPw;
     public InputField signUpId, signUpPw, signUpNick;
 
+    private const string signIn = "Sign In", signUp = "Sign Up";
+
     public void ActiveSignIn() {
+        titleText.text = signIn;
+
         ActiveWindow(true);
 
         signUpId.text = string.Empty;
@@ -20,6 +26,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void ActiveSignUp() {
+        titleText.text = signUp;
+
         ActiveWindow(false);
 
         signInId.text = string.Empty;
