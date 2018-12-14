@@ -1,19 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ScrollManager : MonoBehaviour {
+
     private Transform scrollTransform;
     private Vector3 pivotPos;
-	// Use this for initialization
-	void Start () {
-        scrollTransform = GetComponent<Transform>();
+    private Vector3 vec;
+
+	private void Awake () {
+        scrollTransform = transform;
         pivotPos = scrollTransform.position;
+        vec = Vector3.zero;
 	}
 
-    private void Update()
-    {
-        scrollTransform.position = new Vector3(scrollTransform.position.x, pivotPos.y, scrollTransform.position.z);
+    private void Update() {
+        vec.Set(scrollTransform.position.x, pivotPos.y, scrollTransform.position.z);
+        scrollTransform.position = vec;
     }
 }

@@ -87,7 +87,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f10330613e3ccd04280139da7b55ad06, type: 2}
+  - {fileID: 2100000, guid: 2f3a7e8ec5558ac40a1186bff6bcdb6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -144,4 +144,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getSound: {fileID: 8300000, guid: 025aa80ce83394dbb984ac462d965da6, type: 3}
-  increaseSpeed: 0
+  increaseSpeed: 500

@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Login_UI : MonoBehaviour {
 
-    public GameObject LoginWnd;
     public GameObject signInWnd, signUpWnd;
 
     public Text titleText;
@@ -14,6 +12,11 @@ public class Login_UI : MonoBehaviour {
     public InputField signUpId, signUpPw, signUpNick;
 
     private const string signIn = "Sign In", signUp = "Sign Up";
+
+    private void Awake() {
+        if (UserManager.Instance.Player != null)
+            gameObject.SetActive(false);
+    }
 
     public void ActiveSignIn() {
         titleText.text = signIn;
@@ -46,7 +49,7 @@ public class Login_UI : MonoBehaviour {
     private void CheckSignIn(UserAllInfo[] user) {
         if (signInPw.text.Equals(user[0].password)) {
             UserManager.Instance.SetPlayer(user);
-            LoginWnd.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
