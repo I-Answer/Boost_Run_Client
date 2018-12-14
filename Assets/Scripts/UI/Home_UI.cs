@@ -30,12 +30,12 @@ public class Home_UI : MonoBehaviour {
     }
 
     private IEnumerator Start() {
-        yield return new WaitUntil(() => UserManager.Player != null);
+        yield return new WaitUntil(() => UserManager.Instance.Player != null);
 
-        curImage.sprite = spaceShipImage[UserManager.SelectSpaceShip].sprite;
+        curImage.sprite = spaceShipImage[UserManager.Instance.SelectSpaceShip].sprite;
 
         for (int i = 0; i < spaceShipImage.Length; i++) {
-            if ((UserManager.Player.CarList & (1 << i)) != 0) {
+            if ((UserManager.Instance.Player.CarList & (1 << i)) != 0) {
                 spaceShipImage[i].repair.color = activeColor;
                 spaceShipImage[i].shop.color = inactiveColor;
             }
@@ -80,14 +80,14 @@ public class Home_UI : MonoBehaviour {
     }
 
     public void Select(int selectShip) {
-        if (UserManager.SelectNewSpaceShip(selectShip))
+        if (UserManager.Instance.SelectNewSpaceShip(selectShip))
             curImage.sprite = spaceShipImage[selectShip].sprite;
     }
 
     public void Buy(int buyShip) {
         newBuyShip = buyShip;
 
-        UserManager.Player.BuySpaceShip(1 << buyShip, CompleteBuy);
+        UserManager.Instance.Player.BuySpaceShip(1 << buyShip, CompleteBuy);
     }
 
     private void CompleteBuy(UserSpaceship[] updateShip) {

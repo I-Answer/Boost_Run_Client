@@ -23,7 +23,7 @@ public class RegalUser {
         if ((spaceShipList & buySpaceShip) != 0) return;
 
         var bitflagMap = new Dictionary<string, string>();
-        bitflagMap.Add("nick", UserManager.Player.Name);
+        bitflagMap.Add("nick", UserManager.Instance.Player.Name);
         bitflagMap.Add("bitflag", buySpaceShip.ToString());
 
         spaceShipList |= buySpaceShip;
@@ -91,6 +91,7 @@ public class UserTime {
 
 [Serializable]
 public class UserInfo {
+    public int bitflag;
     public string id;
     public string password;
     public string nick;

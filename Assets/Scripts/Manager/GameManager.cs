@@ -41,13 +41,13 @@ public class GameManager : MonoBehaviour {
         var post = new Dictionary<string, string>();
         post.Add("speed", maxSpeed.ToString());
         post.Add("time", endureTime.ToString());
-        post.Add("nick", UserManager.Player.Name);
+        post.Add("nick", UserManager.Instance.Player.Name);
 
         ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, ActiveGameoverWindow, ServerConnector.ThrowIfFailed, post);
     }
 
     private GameObject MakePlayer() {
-        GameObject playerObj = Instantiate(spaceShipList[UserManager.SelectSpaceShip]);
+        GameObject playerObj = Instantiate(spaceShipList[UserManager.Instance.SelectSpaceShip]);
 
         playerObj.transform.position = spawnPos;
         playerObj.transform.rotation = spawnRot;
@@ -70,10 +70,10 @@ public class GameManager : MonoBehaviour {
     private byte GetChangeEventFlag() {
         byte result = 0;
 
-        if (UserManager.Player.CompareMaxSpeed(maxSpeed))
+        if (UserManager.Instance.Player.CompareMaxSpeed(maxSpeed))
             result |= 0x01;
 
-        if (UserManager.Player.CompareEndureTime(endureTime))
+        if (UserManager.Instance.Player.CompareEndureTime(endureTime))
             result |= 0x02;
 
         return result;
