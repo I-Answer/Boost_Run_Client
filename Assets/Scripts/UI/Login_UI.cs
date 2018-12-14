@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Login_UI : MonoBehaviour {
 
+    private const string signIn = "Sign In", signUp = "Sign Up";
+
     public GameObject signInWnd, signUpWnd;
 
     public Text titleText;
@@ -11,7 +13,7 @@ public class Login_UI : MonoBehaviour {
     public InputField signInId, signInPw;
     public InputField signUpId, signUpPw, signUpNick;
 
-    private const string signIn = "Sign In", signUp = "Sign Up";
+    public AudioClip clickSound;
 
     private void Awake() {
         if (UserManager.Instance.Player != null)
@@ -19,6 +21,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void ActiveSignIn() {
+        SoundManager.PlaySound(clickSound);
+
         titleText.text = signIn;
 
         ActiveWindow(true);
@@ -29,6 +33,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void ActiveSignUp() {
+        SoundManager.PlaySound(clickSound);
+
         titleText.text = signUp;
 
         ActiveWindow(false);
@@ -43,6 +49,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void SignIn() {
+        SoundManager.PlaySound(clickSound);
+
         ServerConnector.Instance.GET<UserAllInfo>(ServerApi.GetUser + signInId.text, CheckSignIn, ServerConnector.ThrowIfFailed);
     }
 
@@ -54,6 +62,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void SignUp() {
+        SoundManager.PlaySound(clickSound);
+
         var postArg = new Dictionary<string, string>();
         postArg.Add("id", signUpId.text);
         postArg.Add("password", signUpPw.text);

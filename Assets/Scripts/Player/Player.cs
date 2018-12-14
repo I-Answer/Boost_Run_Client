@@ -11,6 +11,7 @@ public partial class Player : MonoBehaviour {
     private Speed_UI speedUi;
     private Skill_UI skillUi;
 
+    public AudioClip collisionSound;
     private Coroutine runningCoroutine;
 
     public Sprite skillImage;
@@ -64,12 +65,12 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
-        if (bShield)
-            bShield = false;
-        else
-            Speed -= GetCollisionSpeed();
+        if (bShield) bShield = false;
 
-        Speed -= GetCollisionSpeed();
+        else {
+            Speed -= GetCollisionSpeed();
+            SoundManager.PlaySound(collisionSound);
+        }
     }
 
     public virtual void UseSkill() {

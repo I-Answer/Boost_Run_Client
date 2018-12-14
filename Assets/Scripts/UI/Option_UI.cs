@@ -8,12 +8,21 @@ public class Option_UI : MonoBehaviour {
     }
 
     public GameObject optionWnd;
-
     public AudioButton effect, background;
-
     public AudioClip clickSound;
 
-	public void OpenOption() {
+    private void Awake() {
+        UpdateUi();
+    }
+
+    public void UpdateUi() {
+        SetEffectSoundButton(!SoundManager.EffectSound);
+        SetBackgroundSoundButton(!SoundManager.BackgroundSound);
+    }
+
+    public void OpenOption() {
+        SoundManager.PlaySound(clickSound);
+
         if (SceneManager.NowScene == SceneState.STAGE)
             Time.timeScale = 0f;
 
@@ -29,6 +38,8 @@ public class Option_UI : MonoBehaviour {
     }
 
     public void EffectSoundChange() {
+        SoundManager.PlaySound(clickSound);
+
         if (SoundManager.EffectSound) {
             SetEffectSoundButton(true);
             SoundManager.EffectSound = false;
@@ -41,6 +52,8 @@ public class Option_UI : MonoBehaviour {
     }
 
     public void BackgroundSoundChange() {
+        SoundManager.PlaySound(clickSound);
+
         if (SoundManager.BackgroundSound) {
             SetBackgroundSoundButton(true);
             SoundManager.BackgroundSound = false;

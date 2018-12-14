@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd31e03803a350246a9c91d1f0d56023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionSound: {fileID: 8300000, guid: 95e838e0a30c748cb9d08f70fd02e578, type: 3}
   skillImage: {fileID: 21300000, guid: c0c162384d298f34d9043019e0ad17eb, type: 3}
   skillCoolTime: 4
   decreaseHp: 0.1

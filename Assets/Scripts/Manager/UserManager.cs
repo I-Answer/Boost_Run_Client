@@ -23,6 +23,8 @@ public class UserManager : MonoBehaviour {
     public void SetPlayer(UserAllInfo[] user) {
         playerInfo = new RegalUser(user[0].nick, user[0].maxSpeed, user[0].maxTime, user[0].bitflag);
         selectIndex = PlayerPrefs.GetInt(Player.Name, 0);
+
+        SoundManager.Init(playerInfo.Name);
     }
 
     public RegalUser Player {

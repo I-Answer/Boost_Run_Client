@@ -405,12 +405,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionWnd: {fileID: 356491047}
   effect:
-    on: {fileID: 0}
-    off: {fileID: 0}
+    on: {fileID: 356491049}
+    off: {fileID: 356491048}
   background:
-    on: {fileID: 0}
-    off: {fileID: 0}
-  clickSound: {fileID: 0}
+    on: {fileID: 356491046}
+    off: {fileID: 356491045}
+  clickSound: {fileID: 8300000, guid: 1e6c356d5843c40c8a232158dc6af52a, type: 3}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,9 +952,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1471502350242668, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de, type: 2}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 114291597711259646, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 131637043}
+    - target: {fileID: 114291597711259646, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EffectSoundChange
       objectReference: {fileID: 0}
     - target: {fileID: 114781233278950864, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
         type: 2}
@@ -966,15 +972,15 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseOption
       objectReference: {fileID: 0}
-    - target: {fileID: 114437338518571090, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    - target: {fileID: 114321656002835108, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 131637043}
-    - target: {fileID: 114437338518571090, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    - target: {fileID: 114321656002835108, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SoundChange
+      value: BackgroundSoundChange
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de, type: 2}
@@ -984,9 +990,29 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224926081652555964, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
     type: 2}
   m_PrefabInternal: {fileID: 356491043}
+--- !u!1 &356491045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1134230628770462, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    type: 2}
+  m_PrefabInternal: {fileID: 356491043}
+--- !u!1 &356491046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1015034120955202, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    type: 2}
+  m_PrefabInternal: {fileID: 356491043}
 --- !u!1 &356491047 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1471502350242668, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    type: 2}
+  m_PrefabInternal: {fileID: 356491043}
+--- !u!1 &356491048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1409464033744138, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
+    type: 2}
+  m_PrefabInternal: {fileID: 356491043}
+--- !u!1 &356491049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1712858625485074, guid: 7fa487d1ac7cc8b488ef1f09f1ae07de,
     type: 2}
   m_PrefabInternal: {fileID: 356491043}
 --- !u!1 &363249874
@@ -1221,6 +1247,7 @@ MonoBehaviour:
   maxSpeedText: {fileID: 577061158}
   endureTimeText: {fileID: 1891808688}
   eventText: {fileID: 889684195}
+  eventSound: {fileID: 8300000, guid: 8851237a0219645c29a49683c44c82e6, type: 3}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0

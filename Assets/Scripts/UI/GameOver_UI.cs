@@ -8,6 +8,8 @@ public class GameOver_UI : MonoBehaviour {
     public GameObject record, loading;
     public Text maxSpeedText, endureTimeText, eventText;
 
+    public AudioClip eventSound;
+
     private static GameOver_UI instance;
 
     public static GameOver_UI Instance {
@@ -27,6 +29,9 @@ public class GameOver_UI : MonoBehaviour {
         maxSpeedText.text = string.Format("{0}", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
         eventText.text = eventString[maxEvent];
+
+        if (maxEvent != 0)
+            SoundManager.PlaySound(eventSound);
 
         RecordActive(true);
     }
