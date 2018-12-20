@@ -2551,6 +2551,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0213401ec6e11fb4b9133559f5702a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  homeBackgroundAudio: {fileID: 8300000, guid: 088e0a3f7bd12064585d107c8faae3d4, type: 3}
+  stageBackgroundAudio: {fileID: 8300000, guid: 60d05d56b85106d4d937afd8bf0e5c08,
+    type: 3}
 --- !u!82 &589365192
 AudioSource:
   m_ObjectHideFlags: 0
