@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour {
         ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, ActiveGameoverWindow, ServerConnector.ThrowIfFailed, post);
     }
 
+    public void GoHomeDirect() {
+        Time.timeScale = 1f;
+        SceneManager.SceneLoad("HomeScene");
+    }
+    
     private GameObject MakePlayer() {
         GameObject playerObj = Instantiate(spaceShipList[UserManager.Instance.SelectSpaceShip]);
 

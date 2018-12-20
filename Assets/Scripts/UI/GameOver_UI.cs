@@ -37,8 +37,6 @@ public class GameOver_UI : MonoBehaviour {
     }
 
     public void LoadHome() {
-        // TODO: 서버에 점수 보내는 행동
-
         Time.timeScale = 1f;
         SceneManager.SceneLoad("HomeScene");
     }
