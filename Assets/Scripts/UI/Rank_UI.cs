@@ -8,7 +8,8 @@ public class Rank_UI : MonoBehaviour {
     public GameObject body, loading;
     public Text guideText;
 
-    public Transform content;
+    public RectTransform content;
+    public GameObject recordPrefab;
 
     private void OnEnable() {
         PresentSpeedRank();
@@ -29,15 +30,33 @@ public class Rank_UI : MonoBehaviour {
     }
 
     private void ShowRank(UserSpeed[] speedRanks) {
-        for (int i = 0; i < speedRanks.Length; i++)
-            content.GetChild(i).GetComponent<Record_UI>().SetText(speedRanks[i], i + 1);
+        GameObject buffer;
+
+        InitContent();
+
+        for (int i = 0; i < speedRanks.Length; i++) {
+            if (i >= content.childCount) break;
+
+            buffer = content.GetChild(i).gameObject;
+            buffer.GetComponent<Record_UI>().SetText(speedRanks[i], i + 1);
+            buffer.SetActive(true);
+        }
 
         EnableBody(true);
     }
 
     private void ShowRank(UserTime[] timeRanks) {
-        for (int i = 0; i < timeRanks.Length; i++)
-            content.GetChild(i).GetComponent<Record_UI>().SetText(timeRanks[i], i + 1);
+        GameObject buffer;
+
+        InitContent();
+
+        for (int i = 0; i < timeRanks.Length; i++) {
+            if (i >= content.childCount) break;
+
+            buffer = content.GetChild(i).gameObject;
+            buffer.GetComponent<Record_UI>().SetText(timeRanks[i], i + 1);
+            buffer.SetActive(true);
+        }
 
         EnableBody(true);
     }
@@ -45,5 +64,12 @@ public class Rank_UI : MonoBehaviour {
     private void EnableBody(bool bOn) {
         body.SetActive(bOn);
         loading.SetActive(!bOn);
+    }
+
+    private void InitContent() {
+        for (int i = 0; i < content.childCount; i++)
+            content.GetChild(i).gameObject.SetActive(false);
+
+        content.anchoredPosition = Vector2.zero;
     }
 }

@@ -13,7 +13,7 @@ public class Login_UI : MonoBehaviour {
     public InputField signInId, signInPw;
     public InputField signUpId, signUpPw, signUpNick;
 
-    public AudioClip clickSound;
+    public AudioClip changeWindowSound, successSound;
 
     private void Awake() {
         if (UserManager.Instance.Player != null)
@@ -21,8 +21,6 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void ActiveSignIn() {
-        SoundManager.PlaySound(clickSound);
-
         titleText.text = signIn;
 
         ActiveWindow(true);
@@ -33,8 +31,6 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void ActiveSignUp() {
-        SoundManager.PlaySound(clickSound);
-
         titleText.text = signUp;
 
         ActiveWindow(false);
@@ -44,26 +40,26 @@ public class Login_UI : MonoBehaviour {
     }
 
     private void ActiveWindow(bool bSignIn) {
+        SoundManager.PlaySound(changeWindowSound);
+
         signInWnd.SetActive(bSignIn);
         signUpWnd.SetActive(!bSignIn);
     }
 
     public void SignIn() {
-        SoundManager.PlaySound(clickSound);
-
         ServerConnector.Instance.GET<UserAllInfo>(ServerApi.GetUser + signInId.text, CheckSignIn, ServerConnector.ThrowIfFailed);
     }
 
     private void CheckSignIn(UserAllInfo[] user) {
         if (signInPw.text.Equals(user[0].password)) {
+            SoundManager.PlaySound(successSound);
+
             UserManager.Instance.SetPlayer(user);
             gameObject.SetActive(false);
         }
     }
 
     public void SignUp() {
-        SoundManager.PlaySound(clickSound);
-
         var postArg = new Dictionary<string, string>();
         postArg.Add("id", signUpId.text);
         postArg.Add("password", signUpPw.text);
@@ -73,6 +69,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     private void CheckSignUp(UserInfo[] user) {
+        SoundManager.PlaySound(successSound);
+
         ActiveSignIn();
     }
 }
