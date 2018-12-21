@@ -3,6 +3,8 @@ using UnityEngine;
 
 public partial class Player : MonoBehaviour {
 
+    public const int DecreaseBaseSpeed = 2000;
+
     private new Transform transform;
 
     private GameManager manager;
@@ -20,7 +22,7 @@ public partial class Player : MonoBehaviour {
 
     private Vector3 myPos;
 
-    private bool bShield;
+    private int shieldCount;
 
     protected virtual void Awake() {
         transform = base.transform;
@@ -65,7 +67,7 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
-        if (bShield) bShield = false;
+        if (shieldCount > 0) shieldCount--;
 
         else {
             Speed -= GetCollisionSpeed();
@@ -93,7 +95,7 @@ public partial class Player : MonoBehaviour {
         get { return bCanUseSkill; }
     }
 
-    public bool Shield {
-        set { bShield = value; }
+    public void GetShield() {
+        shieldCount++;
     }
 }

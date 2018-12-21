@@ -3,11 +3,9 @@ using UnityEngine;
 
 public partial class Player : MonoBehaviour {
 
-    const int warningBase = 1800;
-
     private int speed;
 
-    public int startSpeed, increaseSpeed, decreaseSpeed;
+    public int increaseSpeed, decreaseSpeed;
     public float increaseTime;
 
     public AudioClip warningSound;
@@ -16,7 +14,7 @@ public partial class Player : MonoBehaviour {
 
     // increaseTime마다 increaseSpeed만큼 속도 증가
     private IEnumerator UpdateSpeed() {
-        Speed = startSpeed;
+        Speed = DecreaseBaseSpeed;
         StartCoroutine(WarningCheck());
 
         while (true) {
@@ -26,7 +24,7 @@ public partial class Player : MonoBehaviour {
     }
 
     private IEnumerator WarningCheck() {
-        WaitUntil waitBelowWarningBase = new WaitUntil(() => speed < warningBase);
+        WaitUntil waitBelowWarningBase = new WaitUntil(() => speed < DecreaseBaseSpeed);
 
         while (true) {
             yield return waitBelowWarningBase;

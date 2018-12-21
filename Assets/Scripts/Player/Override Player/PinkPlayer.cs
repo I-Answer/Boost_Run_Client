@@ -8,7 +8,7 @@
 
         base.UseSkill();
 
-        if (Speed - changeSpeed >= 1800) SpeedToHp();
+        if (Speed - changeSpeed >= DecreaseBaseSpeed) SpeedToHp();
         else HpToSpeed();
     }
 

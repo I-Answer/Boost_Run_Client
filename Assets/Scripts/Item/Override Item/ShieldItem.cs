@@ -2,6 +2,6 @@
 
     protected override void OnCollision() {
         base.OnCollision();
-        Player.Shield = true;
+        Player.GetShield();
     }
 }

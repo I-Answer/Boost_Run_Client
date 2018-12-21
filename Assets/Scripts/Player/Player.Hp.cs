@@ -3,21 +3,19 @@ using UnityEngine;
 
 public partial class Player : MonoBehaviour {
 
-    private const float decreaseBaseSpeed = 1800f;
-
     private float hp;
     public float decreaseHp, decreaseTime;
 
     private bool bAlive;
 
     private IEnumerator UpdateHp() {
-        WaitUntil waitBelowDecreaseBaseSpeed = new WaitUntil(() => speed < decreaseBaseSpeed);
+        WaitUntil waitBelowDecreaseBaseSpeed = new WaitUntil(() => speed < DecreaseBaseSpeed);
 
         while (bAlive) {
             yield return waitBelowDecreaseBaseSpeed;
             yield return CoroutineStorage.WaitForSeconds(decreaseTime);
 
-            if (speed < decreaseBaseSpeed)
+            if (speed < DecreaseBaseSpeed)
                 Hp -= decreaseHp;
         }
 
