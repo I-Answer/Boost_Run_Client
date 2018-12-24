@@ -38,12 +38,7 @@ public class ServerConnector : MonoBehaviour {
         var www = new WWW(url);
         yield return www;
 
-        if (www.error == null) {
-            var parsedResult = JsonParser.FromJson<T>(www.text);
-            onSuccess(parsedResult);
-        }
-
-        else onFailure("WWW Call Error");
+        InvokeCallback<T>(www, onSuccess, onFailure);
     }
 
     public void POST<T>(string url, Action<T[]> onSuccess, Action<string> onFailure, Dictionary<string, string> post) {
@@ -60,12 +55,21 @@ public class ServerConnector : MonoBehaviour {
 
         yield return www;
 
+        InvokeCallback<T>(www, onSuccess, onFailure);
+    }
+
+    private void InvokeCallback<T>(WWW www, Action<T[]> onSuccess, Action<string> onFailure) {
         if (www.error == null) {
             var parsedResult = JsonParser.FromJson<T>(www.text);
-            onSuccess(parsedResult);
+
+            if (onSuccess != null)
+                onSuccess(parsedResult);
         }
 
-        else onFailure(www.error);
+        else {
+            if (onFailure != null)
+                onFailure(www.error);
+        }
     }
 
     public static void ThrowIfFailed(string errorMessage) {

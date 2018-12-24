@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour {
         post.Add("time", endureTime.ToString());
         post.Add("nick", UserManager.Instance.Player.Name);
 
-        GameOver_UI.Instance.Active();
-        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, ActiveGameoverWindow, ServerConnector.ThrowIfFailed, post);
+        GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
+        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, null, ServerConnector.ThrowIfFailed, post);
     }
 
     public void GoHomeDirect() {

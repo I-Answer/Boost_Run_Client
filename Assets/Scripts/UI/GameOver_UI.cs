@@ -5,9 +5,7 @@ public class GameOver_UI : MonoBehaviour {
 
     private string[] eventString = new string[] { "", "Highest speed!!", "Highest time!!", "Highest speed, time!!" };
 
-    public GameObject record, loading;
     public Text maxSpeedText, endureTimeText, eventText;
-
     public AudioClip eventSound;
 
     private static GameOver_UI instance;
@@ -21,10 +19,6 @@ public class GameOver_UI : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void Active() {
-        RecordActive(false);
-    }
-
     public void Active(int maxSpeed, int endureTime, byte maxEvent) {
         maxSpeedText.text = string.Format("{0}", maxSpeed);
         endureTimeText.text = string.Format("{0} : {1}", endureTime / 60, endureTime % 60);
@@ -33,19 +27,11 @@ public class GameOver_UI : MonoBehaviour {
         if (maxEvent != 0)
             SoundManager.PlaySound(eventSound);
 
-        RecordActive(true);
+        gameObject.SetActive(true);
     }
 
     public void LoadHome() {
         Time.timeScale = 1f;
         SceneManager.SceneLoad("HomeScene");
-    }
-
-    private void RecordActive(bool bOn) {
-        record.SetActive(bOn);
-        loading.SetActive(!bOn);
-
-        if (!gameObject.activeInHierarchy)
-            gameObject.SetActive(true);
     }
 }

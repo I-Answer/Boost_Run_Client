@@ -44,8 +44,10 @@ public class Speed_UI : MonoBehaviour, IPlayerUi<int> {
     }
 
     private void SetTextColor(int speed) {
-        if (speed < Player.DecreaseBaseSpeed && speedText.color != Color.red)
-            speedText.color = Color.red;
+        if (speed < Player.DecreaseBaseSpeed) {
+            if (speedText.color != Color.red)
+                speedText.color = Color.red;
+        }
 
         else if (speedText.color != Color.white)
             speedText.color = Color.white;
