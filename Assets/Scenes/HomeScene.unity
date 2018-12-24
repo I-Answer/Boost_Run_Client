@@ -1634,7 +1634,7 @@ Prefab:
     - target: {fileID: 224186020221771010, guid: ca955f1595cc64449a4ba30c4d643710,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 1938720784463680, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -1700,7 +1700,14 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114366020767049190, guid: ca955f1595cc64449a4ba30c4d643710,
+        type: 2}
+      propertyPath: m_Vertical
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114082388751831164, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
+    - {fileID: 50978420557123166, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &348630014

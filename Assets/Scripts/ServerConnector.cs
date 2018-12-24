@@ -71,8 +71,6 @@ public class ServerConnector : MonoBehaviour {
     public static void ThrowIfFailed(string errorMessage) {
 #if UNITY_EDITOR
         Debug.Log(errorMessage);
-#else
-        throw new System.Net.WebException(errorMessage);
 #endif
     }
 }

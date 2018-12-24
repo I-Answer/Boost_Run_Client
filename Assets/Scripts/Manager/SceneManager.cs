@@ -46,6 +46,7 @@ public class SceneManager : MonoBehaviour {
     }
 
     private IEnumerator Start() {
+        System.GC.Collect();
         AsyncOperation op = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
 
         yield return null;
