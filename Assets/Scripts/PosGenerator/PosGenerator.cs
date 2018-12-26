@@ -36,9 +36,6 @@ public class PosGenerator {
 
         decreaseProbability = defaultProbability / GameManager.posCount;
         increaseProbability = decreaseProbability / (GameManager.posCount - 1);
-
-        decreaseProbability *= 0.25f;
-        increaseProbability *= 0.25f;
     }
 
     public void Init() {
