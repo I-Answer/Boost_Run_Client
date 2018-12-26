@@ -20,6 +20,8 @@ public class PosGenerator {
     private List<int> appearPosTranslator;
 
     private float totalProbability;
+    private float increaseProbability;
+    private float decreaseProbability;
 
     public PosGenerator() {
         appearPosTranslator = new List<int>(GameManager.posCount);
@@ -31,6 +33,12 @@ public class PosGenerator {
             appearPos.Add(new AppearPos(nowPos, defaultProbability));
             nowPos.x += GameManager.distance;
         }
+
+        decreaseProbability = defaultProbability / GameManager.posCount;
+        increaseProbability = decreaseProbability / (GameManager.posCount - 1);
+
+        decreaseProbability *= 0.25f;
+        increaseProbability *= 0.25f;
     }
 
     public void Init() {
@@ -60,6 +68,15 @@ public class PosGenerator {
 
         for (int i = index; i < appearPosTranslator.Count - 1; i++)
             appearPosTranslator[i] = appearPosTranslator[i + 1];
+
+        for (int i = 0; i < appearPos.Count; i++) {
+            if (i == index) {
+                appearPos[i].Probability -= decreaseProbability;
+                continue;
+            }
+
+            appearPos[i].Probability += increaseProbability;
+        }
 
         appearPosTranslator.RemoveAt(appearPosTranslator.Count - 1);
         return returnPos;
