@@ -1,7 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Rank_UI : MonoBehaviour {
+
+    public class RecordBuffer<T> : List<T> {
+        public bool IsVaild { get; private set; }
+
+        public void Init(T[] collection) {
+            AddRange(collection);
+            IsVaild = true;
+        }
+
+        public new void Clear() {
+            base.Clear();
+            IsVaild = false;
+        }
+    }
 
     private const string speedGuide = "Speed", timeGuide = "Time";
 
@@ -9,9 +24,24 @@ public class Rank_UI : MonoBehaviour {
     public Text guideText;
 
     public RectTransform content;
-    public GameObject recordPrefab;
+
+    private RecordBuffer<UserSpeed> speedBuffer;
+    private RecordBuffer<UserTime> timeBuffer;
+
+    private List<Record_UI> records;
+
+    public void Awake() {
+        speedBuffer = new RecordBuffer<UserSpeed>();
+        timeBuffer = new RecordBuffer<UserTime>();
+
+        records = new List<Record_UI>(content.GetComponentsInChildren<Record_UI>());
+        gameObject.SetActive(false);
+    }
 
     private void OnEnable() {
+        speedBuffer.Clear();
+        timeBuffer.Clear();
+
         PresentSpeedRank();
     }
 
@@ -19,43 +49,55 @@ public class Rank_UI : MonoBehaviour {
         EnableBody(false);
         guideText.text = speedGuide;
 
-        ServerConnector.Instance.GET<UserSpeed>(ServerApi.SpeedRank, ShowRank, ServerConnector.ThrowIfFailed);
+        if (!speedBuffer.IsVaild)
+            ServerConnector.Instance.GET<UserSpeed>(ServerApi.SpeedRank, GetRank, ServerConnector.ThrowIfFailed);
+
+        else ShowSpeedRank();
     }
 
     public void PresentTimeRank() {
         EnableBody(false);
         guideText.text = timeGuide;
 
-        ServerConnector.Instance.GET<UserTime>(ServerApi.timeRank, ShowRank, ServerConnector.ThrowIfFailed);
+        if (!timeBuffer.IsVaild)
+            ServerConnector.Instance.GET<UserTime>(ServerApi.timeRank, GetRank, ServerConnector.ThrowIfFailed);
+
+        else ShowTimeRank();
     }
 
-    private void ShowRank(UserSpeed[] speedRanks) {
-        GameObject buffer;
+    private void GetRank(UserSpeed[] speedRanks) {
+        speedBuffer.Init(speedRanks);
+        ShowSpeedRank();
+    }
+
+    private void GetRank(UserTime[] timeRanks) {
+        timeBuffer.Init(timeRanks);
+        ShowTimeRank();
+    }
+
+    private void ShowSpeedRank() {
+        int i = 0;
 
         InitContent();
 
-        for (int i = 0; i < speedRanks.Length; i++) {
-            if (i >= content.childCount) break;
-
-            buffer = content.GetChild(i).gameObject;
-            buffer.GetComponent<Record_UI>().SetText(speedRanks[i], i + 1);
-            buffer.SetActive(true);
+        foreach (var record in records) {
+            record.SetText(speedBuffer[i], i + 1);
+            record.gameObject.SetActive(true);
+            i++;
         }
 
         EnableBody(true);
     }
 
-    private void ShowRank(UserTime[] timeRanks) {
-        GameObject buffer;
+    private void ShowTimeRank() {
+        int i = 0;
 
         InitContent();
 
-        for (int i = 0; i < timeRanks.Length; i++) {
-            if (i >= content.childCount) break;
-
-            buffer = content.GetChild(i).gameObject;
-            buffer.GetComponent<Record_UI>().SetText(timeRanks[i], i + 1);
-            buffer.SetActive(true);
+        foreach (var record in records) {
+            record.SetText(timeBuffer[i], i + 1);
+            record.gameObject.SetActive(true);
+            i++;
         }
 
         EnableBody(true);
