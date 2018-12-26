@@ -38,7 +38,7 @@ public class ServerConnector : MonoBehaviour {
         var www = new WWW(url);
         yield return www;
 
-        InvokeCallback<T>(www, onSuccess, onFailure);
+        InvokeCallback(www, onSuccess, onFailure);
     }
 
     public void POST<T>(string url, Action<T[]> onSuccess, Action<string> onFailure, Dictionary<string, string> post) {
@@ -55,7 +55,7 @@ public class ServerConnector : MonoBehaviour {
 
         yield return www;
 
-        InvokeCallback<T>(www, onSuccess, onFailure);
+        InvokeCallback(www, onSuccess, onFailure);
     }
 
     private void InvokeCallback<T>(WWW www, Action<T[]> onSuccess, Action<string> onFailure) {

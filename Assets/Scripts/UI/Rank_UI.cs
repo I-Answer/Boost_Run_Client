@@ -81,9 +81,10 @@ public class Rank_UI : MonoBehaviour {
         InitContent();
 
         foreach (var record in records) {
-            record.SetText(speedBuffer[i], i + 1);
+            if (i >= speedBuffer.Count) break;
+            
+            record.SetText(speedBuffer[i], ++i);
             record.gameObject.SetActive(true);
-            i++;
         }
 
         EnableBody(true);
@@ -95,9 +96,10 @@ public class Rank_UI : MonoBehaviour {
         InitContent();
 
         foreach (var record in records) {
-            record.SetText(timeBuffer[i], i + 1);
+            if (i >= timeBuffer.Count) break;
+
+            record.SetText(timeBuffer[i], ++i);
             record.gameObject.SetActive(true);
-            i++;
         }
 
         EnableBody(true);
