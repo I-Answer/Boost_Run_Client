@@ -7,23 +7,21 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
     private readonly Vector3 appearZPos = new Vector3(0, 0, 600);
 
     private List<FieldObject> unusedObject;
-    private List<Vector3> appearXPos;
+    private static PosGenerator posGenerator;
 
     private Player player;
     public float distance;
 
-    protected virtual void Awake() {
+    private static bool isInit;
+
+    private void Awake() {
+        if (posGenerator == null)
+            posGenerator = new PosGenerator();
+
         unusedObject = new List<FieldObject>();
 
         for (int i = 0; i < transform.childCount; i++)
             unusedObject.Add(transform.GetChild(i).GetComponent<FieldObject>());
-
-        appearXPos = new List<Vector3>();
-
-        Vector3 temp = Vector3.zero;
-
-        for (temp.x = -GameManager.distance; temp.x <= GameManager.distance; temp.x += GameManager.distance)
-            appearXPos.Add(temp);
     }
 
     public void PlayerConnect(Player player) {
@@ -34,7 +32,17 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
         while (true) {
             yield return CoroutineStorage.WaitForSeconds(GetWaitTime());
 
+            if (!isInit) {
+                posGenerator.Init();
+                isInit = true;
+            }
+
             OnActivate();
+
+            yield return null;
+            
+            if (isInit)
+                isInit = false;
         }
     }
 
@@ -48,8 +56,8 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
         unusedObject.Add(obstacle);
     }
 
-    protected virtual Vector3 GetRandomXPos() {
-        return appearXPos[Random.Range(0, appearXPos.Count)];
+    private Vector3 GetRandomXPos() {
+        return posGenerator.GetRandomPos();
     }
 
     private FieldObject GetRandomObject() {

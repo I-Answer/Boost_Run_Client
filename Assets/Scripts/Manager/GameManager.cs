@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject[] spaceShipList;
 
+    public const int posCount = 3;
     public const float distance = 10f;
 
     private readonly Vector3 spawnPos;

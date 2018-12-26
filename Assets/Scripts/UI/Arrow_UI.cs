@@ -11,6 +11,7 @@ public class Arrow_UI : MonoBehaviour, IPointerDownHandler, IPlayerConnect {
 
     private Vector3 myMoveVector;
     private Player player;
+    private float maxDistance;
 
     public void PlayerConnect(Player player) {
         this.player = player;
@@ -19,6 +20,8 @@ public class Arrow_UI : MonoBehaviour, IPointerDownHandler, IPlayerConnect {
     private void Awake() {
         myMoveVector = Vector3.zero;
         myMoveVector.x = (float)direction * GameManager.distance;
+
+        maxDistance = GameManager.distance * (GameManager.posCount / 2);
 
 #if UNITY_EDITOR
         if (direction.Equals(Direction.LEFT))
@@ -42,7 +45,7 @@ public class Arrow_UI : MonoBehaviour, IPointerDownHandler, IPlayerConnect {
 
     private void Move() {
         // 눌렀을 때 맵을 벗어나지 않는다면 움직임
-        if (Mathf.Abs(player.Position.x + myMoveVector.x) <= GameManager.distance)
+        if (Mathf.Abs(player.Position.x + myMoveVector.x) <= maxDistance)
             player.Move(player.Position + myMoveVector);
     }
 }

@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 600
-  itemManager: {fileID: 1582682506}
+  appearProbability: 1
 --- !u!4 &1017101396
 Transform:
   m_ObjectHideFlags: 0
@@ -3119,8 +3119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 600
-  obstacleManager: {fileID: 1017101393}
-  appearProbability: 0.2
+  appearProbability: 1
 --- !u!4 &1582682507
 Transform:
   m_ObjectHideFlags: 0
