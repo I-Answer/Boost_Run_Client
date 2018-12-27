@@ -3,7 +3,7 @@ using UnityEngine;
 
 public partial class Player : MonoBehaviour {
 
-    public const int DecreaseBaseSpeed = 2000;
+    public const int DecreaseBaseSpeed = 1800;
 
     private new Transform transform;
 
@@ -38,7 +38,7 @@ public partial class Player : MonoBehaviour {
         myPos = transform.position;
 
         hp = 1f;
-        isAlive = true;
+        bAlive = true;
     }
 
     private void Start() {
