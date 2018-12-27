@@ -1,14 +1,25 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 public class GreenPlayer : Player {
 
+    public GameObject shieldObj;
+    private GameObject shield;
+
     public float invincibleTime;
     private bool isInvincibilityMode;
+    private bool isShieldInit = false;
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
 
         base.UseSkill();
+
+        if(!isShieldInit)
+        {
+            shield = Instantiate(shieldObj, base.transform);
+            isShieldInit = true;
+        }
 
         StartCoroutine(Invincible());
     }
@@ -20,7 +31,7 @@ public class GreenPlayer : Player {
     }
 
     private void SetInvincibility(bool isInvincible) {
-        // TODO: 보호막 이펙트 설정 ex. 보호막 게임오브젝트.SetActive(isInvincible);
+        shield.SetActive(isInvincible);
         isInvincibilityMode = isInvincible;
     }
 
