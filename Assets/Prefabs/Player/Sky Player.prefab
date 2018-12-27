@@ -97,11 +97,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionSound: {fileID: 8300000, guid: 95e838e0a30c748cb9d08f70fd02e578, type: 3}
   skillImage: {fileID: 21300000, guid: 3d375ddaef3d3fa40ac493329ab5e5a2, type: 3}
-  skillCoolTime: 10
+  skillCoolTime: 5
   decreaseHp: 0.1
   decreaseTime: 1
-  startSpeed: 1800
   increaseSpeed: 150
   decreaseSpeed: 50
   increaseTime: 1
   warningSound: {fileID: 8300000, guid: 577d93e73cafd8f4f8c350ba015ee439, type: 3}
+  shieldObj: {fileID: 189120, guid: 8f9579b7073e0eb4ba9cd671ab7a3f6a, type: 2}
