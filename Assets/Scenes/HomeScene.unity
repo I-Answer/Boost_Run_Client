@@ -1705,6 +1705,12 @@ Prefab:
       propertyPath: m_Vertical
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114445747694481774, guid: ca955f1595cc64449a4ba30c4d643710,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3aad84cb4f82b4741b2b91cd9c42c701,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 114082388751831164, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
     - {fileID: 50978420557123166, guid: ca955f1595cc64449a4ba30c4d643710, type: 2}
