@@ -278,9 +278,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 2024664512}
+  loadingBar: {fileID: 505948856}
   homeImage: {fileID: 21300000, guid: 5e9c117e413373742ab28936d98a59b6, type: 3}
   stageImage: {fileID: 21300000, guid: cb114212d7ba81b4c9f3ae0d98c3c844, type: 3}
-  loadingBar: {fileID: 505948856}
+  adProbability: 1
 --- !u!1 &505948854
 GameObject:
   m_ObjectHideFlags: 0
