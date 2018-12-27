@@ -65,13 +65,13 @@ public class Option_UI : MonoBehaviour {
         }
     }
 
-    private void SetEffectSoundButton(bool bOn) {
-        effect.on.SetActive(bOn);
-        effect.off.SetActive(!bOn);
+    private void SetEffectSoundButton(bool isOn) {
+        effect.on.SetActive(isOn);
+        effect.off.SetActive(!isOn);
     }
 
-    private void SetBackgroundSoundButton(bool bOn) {
-        background.on.SetActive(bOn);
-        background.off.SetActive(!bOn);
+    private void SetBackgroundSoundButton(bool isOn) {
+        background.on.SetActive(isOn);
+        background.off.SetActive(!isOn);
     }
 }

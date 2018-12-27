@@ -38,7 +38,7 @@ public partial class Player : MonoBehaviour {
         myPos = transform.position;
 
         hp = 1f;
-        bAlive = true;
+        isAlive = true;
     }
 
     private void Start() {

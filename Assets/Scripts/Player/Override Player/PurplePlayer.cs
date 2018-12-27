@@ -1,7 +1,7 @@
 ﻿public class PurplePlayer : Player {
 
     public int boostScale;
-    private bool bBoost;
+    private bool useBoost;
 
     public override void UseSkill() {
         if (!CanUseSkill) return;
@@ -9,15 +9,15 @@
         base.UseSkill();
         
         IncreaseScale *= boostScale;
-        bBoost = true;
+        useBoost = true;
     }
 
     public override void Collision() {
         base.Collision();
 
-        if (bBoost) {
+        if (useBoost) {
             IncreaseScale = 1;
-            bBoost = false;
+            useBoost = false;
         }
     }
 }

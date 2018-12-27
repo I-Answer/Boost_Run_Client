@@ -12,7 +12,7 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
     private Vector3 moveVec;
 
     private int playerSpeed;
-    private bool bCollision;
+    private bool isCollision;
 
     protected abstract void OnCollision();
 
@@ -33,7 +33,7 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
         gameObject.SetActive(true);
         transform.localPosition = appearPos;
 
-        bCollision = false;
+        isCollision = false;
 
         StartCoroutine(Move());
     }
@@ -54,9 +54,9 @@ public abstract class FieldObject : MonoBehaviour, IPlayerConnect {
     }
 
     private bool IsCollision() {
-        if (bCollision || transform.position.z > player.Position.z) return false;
+        if (isCollision || transform.position.z > player.Position.z) return false;
 
-        bCollision = true;
+        isCollision = true;
 
         return Mathf.Approximately(player.Position.x, transform.position.x);
     }

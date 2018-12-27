@@ -50,7 +50,7 @@ public class Rank_UI : MonoBehaviour {
         guideText.text = speedGuide;
 
         if (!speedBuffer.IsVaild)
-            ServerConnector.Instance.GET<UserSpeed>(ServerApi.SpeedRank, GetRank, ServerConnector.ThrowIfFailed);
+            ServerConnector.Instance.GET<UserSpeed>(ServerApi.SpeedRank, GetRank);
 
         else ShowSpeedRank();
     }
@@ -60,7 +60,7 @@ public class Rank_UI : MonoBehaviour {
         guideText.text = timeGuide;
 
         if (!timeBuffer.IsVaild)
-            ServerConnector.Instance.GET<UserTime>(ServerApi.timeRank, GetRank, ServerConnector.ThrowIfFailed);
+            ServerConnector.Instance.GET<UserTime>(ServerApi.timeRank, GetRank);
 
         else ShowTimeRank();
     }
@@ -105,9 +105,9 @@ public class Rank_UI : MonoBehaviour {
         EnableBody(true);
     }
 
-    private void EnableBody(bool bOn) {
-        body.SetActive(bOn);
-        loading.SetActive(!bOn);
+    private void EnableBody(bool isOn) {
+        body.SetActive(isOn);
+        loading.SetActive(!isOn);
     }
 
     private void InitContent() {

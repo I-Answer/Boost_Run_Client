@@ -30,7 +30,13 @@ public class ServerConnector : MonoBehaviour {
         }
     }
 
-    public void GET<T>(string url, Action<T[]> onSuccess, Action<string> onFailure) {
+    public static Dictionary<string, string> PostDictionary { get; set; }
+
+    private void Awake() {
+        PostDictionary = new Dictionary<string, string>();
+    }
+
+    public void GET<T>(string url, Action<T[]> onSuccess = null, Action<string> onFailure = null) {
         StartCoroutine(GetImpl(url, onSuccess, onFailure));
     }
 
@@ -41,14 +47,14 @@ public class ServerConnector : MonoBehaviour {
         InvokeCallback(www, onSuccess, onFailure);
     }
 
-    public void POST<T>(string url, Action<T[]> onSuccess, Action<string> onFailure, Dictionary<string, string> post) {
-        StartCoroutine(POSTImpl(url, onSuccess, onFailure, post));
+    public void POST<T>(string url, Action<T[]> onSuccess = null, Action<string> onFailure = null) {
+        StartCoroutine(POSTImpl(url, onSuccess, onFailure));
     }
 
-    private IEnumerator POSTImpl<T>(string url, Action<T[]> onSuccess, Action<string> onFailure, Dictionary<string, string> post) {
+    private IEnumerator POSTImpl<T>(string url, Action<T[]> onSuccess, Action<string> onFailure) {
         WWWForm form = new WWWForm();
 
-        foreach (var post_arg in post)
+        foreach (var post_arg in PostDictionary)
             form.AddField(post_arg.Key, post_arg.Value);
        
         var www = new WWW(url, form);

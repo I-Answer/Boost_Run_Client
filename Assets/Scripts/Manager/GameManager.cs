@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
@@ -39,13 +38,13 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0f;
         endureTime = (int)(Time.time - startTime);
 
-        var post = new Dictionary<string, string>();
-        post.Add("speed", maxSpeed.ToString());
-        post.Add("time", endureTime.ToString());
-        post.Add("nick", UserManager.Instance.Player.Name);
+        ServerConnector.PostDictionary.Clear();
+        ServerConnector.PostDictionary.Add("speed", maxSpeed.ToString());
+        ServerConnector.PostDictionary.Add("time", endureTime.ToString());
+        ServerConnector.PostDictionary.Add("nick", UserManager.Instance.Player.Name);
 
         GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
-        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord, null, ServerConnector.ThrowIfFailed, post);
+        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord);
     }
 
     public void GoHomeDirect() {

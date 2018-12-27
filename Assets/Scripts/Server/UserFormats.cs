@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 public enum SpaceShipList {
     Red, Pink, Yellow, Green, Sky, Purple
@@ -22,12 +21,12 @@ public class RegalUser {
     public void BuySpaceShip(int buySpaceShip, Action<UserSpaceship[]> applyUi) {
         if ((spaceShipList & buySpaceShip) != 0) return;
 
-        var bitflagMap = new Dictionary<string, string>();
-        bitflagMap.Add("nick", UserManager.Instance.Player.Name);
-        bitflagMap.Add("bitflag", buySpaceShip.ToString());
+        ServerConnector.PostDictionary.Clear();
+        ServerConnector.PostDictionary.Add("nick", UserManager.Instance.Player.Name);
+        ServerConnector.PostDictionary.Add("bitflag", buySpaceShip.ToString());
 
         spaceShipList |= buySpaceShip;
-        ServerConnector.Instance.POST(ServerApi.Bitflag, applyUi, ServerConnector.ThrowIfFailed, bitflagMap);
+        ServerConnector.Instance.POST(ServerApi.Bitflag, applyUi);
     }
 
     public bool CompareMaxSpeed(int nowSpeed) {
