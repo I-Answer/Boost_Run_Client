@@ -6,12 +6,12 @@ public partial class Player : MonoBehaviour {
     private float hp;
     public float decreaseHp, decreaseTime;
 
-    private bool isAlive;
+    private bool bAlive;
 
     private IEnumerator UpdateHp() {
         WaitUntil waitBelowDecreaseBaseSpeed = new WaitUntil(() => speed < DecreaseBaseSpeed);
 
-        while (isAlive) {
+        while (bAlive) {
             yield return waitBelowDecreaseBaseSpeed;
             yield return CoroutineStorage.WaitForSeconds(decreaseTime);
 
@@ -26,7 +26,7 @@ public partial class Player : MonoBehaviour {
         get { return hp; }
         set {
             if (value <= 0f) {
-                isAlive = false;
+                bAlive = false;
                 value = 0f;
             }
 

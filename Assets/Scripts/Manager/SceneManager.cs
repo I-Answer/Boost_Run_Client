@@ -9,9 +9,6 @@ public enum SceneState {
 
 public class SceneManager : MonoBehaviour {
 
-    public Image panel;
-    public Sprite homeImage, stageImage;
-
     private const float maxFill = 1f;
 
     private const string homeSceneName = "HomeScene";
@@ -23,7 +20,9 @@ public class SceneManager : MonoBehaviour {
     private static string nextSceneName;
     private static SceneState nowScene;
 
-    public Image loadingBar;
+    public Image panel, loadingBar;
+    public Sprite homeImage, stageImage;
+    public float adProbability;
 
     private void Awake() {
         switch (nextSceneName) {
@@ -46,6 +45,9 @@ public class SceneManager : MonoBehaviour {
     }
 
     private IEnumerator Start() {
+        if (nextSceneName.Equals(homeSceneName))
+            ShowAd();
+
         System.GC.Collect();
         AsyncOperation op = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
 
@@ -80,6 +82,11 @@ public class SceneManager : MonoBehaviour {
         nowScene = SceneState.LOADING;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(loadingSceneName);
+    }
+
+    private void ShowAd() {
+        if (Random.value < adProbability)
+            AdsManager.ShowAd(AdsManager.AdState.Video);
     }
 
     public static SceneState NowScene {
