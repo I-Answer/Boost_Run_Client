@@ -48,10 +48,11 @@ public class SceneManager : MonoBehaviour {
         if (nextSceneName.Equals(homeSceneName))
             ShowAd();
 
-        System.GC.Collect();
         AsyncOperation op = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
 
         yield return null;
+
+        System.GC.Collect();
 
         while (true) {
             op.allowSceneActivation = false;

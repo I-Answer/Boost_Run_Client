@@ -28,6 +28,7 @@ public class Option_UI : MonoBehaviour {
 
         SoundManager.PlaySound(clickSound);
         optionWnd.SetActive(true);
+        System.GC.Collect();
     }
 
     public void CloseOption() {
