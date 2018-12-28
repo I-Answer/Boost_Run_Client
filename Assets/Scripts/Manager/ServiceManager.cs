@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+
 #if UNITY_ADS
 using UnityEngine.Advertisements;
 #endif
 
-public class AdsManager : MonoBehaviour {
+#if UNITY_ANALYTICS
+using UnityEngine.Analytics;
+#endif
+
+public class ServiceManager : MonoBehaviour {
 
     public enum AdState {
         Video, RewardVideo
     }
 
-    private const string videoKeys = "video";
-    private const string rewardKeys = "rewardVideo";
-
     private const string androidId = "2974257";
     private const string iosId = "2974256";
+
+    private const string videoKeys = "video";
+    private const string rewardKeys = "rewardVideo";
 
     private static bool isInit;
 

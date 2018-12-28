@@ -46,7 +46,7 @@ public class SceneManager : MonoBehaviour {
 
     private IEnumerator Start() {
         if (nextSceneName.Equals(homeSceneName))
-            AdsManager.ShowAd(AdsManager.AdState.Video, adProbability);
+            ServiceManager.ShowAd(ServiceManager.AdState.Video, adProbability);
 
         AsyncOperation op = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
 

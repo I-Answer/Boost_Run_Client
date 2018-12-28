@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5372407}
   - component: {fileID: 5372406}
   m_Layer: 0
-  m_Name: Ads Manager
+  m_Name: Service Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
