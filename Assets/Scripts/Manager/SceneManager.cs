@@ -46,7 +46,7 @@ public class SceneManager : MonoBehaviour {
 
     private IEnumerator Start() {
         if (nextSceneName.Equals(homeSceneName))
-            ShowAd();
+            AdsManager.ShowAd(AdsManager.AdState.Video, adProbability);
 
         AsyncOperation op = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
 
@@ -83,11 +83,6 @@ public class SceneManager : MonoBehaviour {
         nowScene = SceneState.LOADING;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(loadingSceneName);
-    }
-
-    private void ShowAd() {
-        if (Random.value < adProbability)
-            AdsManager.ShowAd(AdsManager.AdState.Video);
     }
 
     public static SceneState NowScene {
