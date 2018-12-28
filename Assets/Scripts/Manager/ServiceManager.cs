@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 #if UNITY_ADS
 using UnityEngine.Advertisements;
@@ -30,10 +29,12 @@ public class ServiceManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+#if UNITY_ADS
 #if UNITY_ANDROID
         Advertisement.Initialize(androidId);
 #elif UNITY_IOS
         Advertisement.Initialize(iosId);
+#endif
 #endif
     }
 
