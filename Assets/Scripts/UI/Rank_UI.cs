@@ -30,12 +30,11 @@ public class Rank_UI : MonoBehaviour {
 
     private List<Record_UI> records;
 
-    public void Awake() {
+    private void Awake() {
         speedBuffer = new RecordBuffer<UserSpeed>();
         timeBuffer = new RecordBuffer<UserTime>();
 
         records = new List<Record_UI>(content.GetComponentsInChildren<Record_UI>());
-        gameObject.SetActive(false);
     }
 
     private void OnEnable() {
