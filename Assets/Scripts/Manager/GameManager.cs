@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     private int endureTime;
     private int bitflag;
 
-    private float startTime;
+    public float startTime;
 
     public GameManager() {
         spawnPos = new Vector3(0f, 8f, -5f);

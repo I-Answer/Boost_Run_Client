@@ -2,8 +2,6 @@
 
 public class SkyPlayer : Player {
 
-    public GameObject shieldObj;
-    private GameObject shield;
     private int equipShieldCount = 0;
     private bool isShieldInit = false;
 
@@ -11,15 +9,11 @@ public class SkyPlayer : Player {
         if (!CanUseSkill) return;
 
         base.UseSkill();
-        if(!isShieldInit)
-        {
-            shield = Instantiate(shieldObj, base.transform);
-            isShieldInit = true;
-        }
+
         equipShieldCount++;
 
         if (equipShieldCount <= 1)
-            shield.SetActive(true);
+            shieldObj.SetActive(true);
     }
 
     public override void Collision() {
@@ -27,7 +21,7 @@ public class SkyPlayer : Player {
         {
             equipShieldCount--;
             if (equipShieldCount <= 0)
-                shield.SetActive(false);
+                shieldObj.SetActive(false);
         }
            
         else base.Collision();

@@ -5,8 +5,8 @@ public partial class Player : MonoBehaviour {
 
     private int speed;
 
-    public int increaseSpeed, decreaseSpeed;
-    public float increaseTime;
+    private const int increaseSpeed = 150, decreaseSpeed = 50;
+    private const float increaseTime = 1f;
 
     public AudioClip warningSound;
 

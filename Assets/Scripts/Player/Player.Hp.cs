@@ -4,16 +4,16 @@ using UnityEngine;
 public partial class Player : MonoBehaviour {
 
     private float hp;
-    public float decreaseHp, decreaseTime;
+    private const float decreaseHp = 0.1f, decreaseTime = 1f;
 
     private bool bAlive;
-
+    
     private IEnumerator UpdateHp() {
         WaitUntil waitBelowDecreaseBaseSpeed = new WaitUntil(() => speed < DecreaseBaseSpeed);
 
         while (bAlive) {
             yield return waitBelowDecreaseBaseSpeed;
-            yield return CoroutineStorage.WaitForSeconds(decreaseTime);
+            yield return CoroutineStorage.WaitForSeconds(decreaseTime * Mathf.Clamp(-0.1f * Mathf.Log10(Time.time - manager.startTime + 1.0f) + 1, 0.5f, 1.0f));
 
             if (speed < DecreaseBaseSpeed)
                 Hp -= decreaseHp;

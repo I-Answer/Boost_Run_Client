@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class GreenPlayer : Player {
 
-    public GameObject shieldObj;
-    private GameObject shield;
-
     public float invincibleTime;
     private bool isInvincibilityMode;
     private bool isShieldInit = false;
@@ -14,12 +11,6 @@ public class GreenPlayer : Player {
         if (!CanUseSkill) return;
 
         base.UseSkill();
-
-        if(!isShieldInit)
-        {
-            shield = Instantiate(shieldObj, base.transform);
-            isShieldInit = true;
-        }
 
         StartCoroutine(Invincible());
     }
@@ -31,7 +22,7 @@ public class GreenPlayer : Player {
     }
 
     private void SetInvincibility(bool isInvincible) {
-        shield.SetActive(isInvincible);
+        shieldObj.SetActive(isInvincible);
         isInvincibilityMode = isInvincible;
     }
 

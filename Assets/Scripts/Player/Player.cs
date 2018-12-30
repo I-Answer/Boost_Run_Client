@@ -22,6 +22,7 @@ public partial class Player : MonoBehaviour {
 
     private Vector3 myPos;
 
+    public GameObject shieldObj;
     private int shieldCount;
 
     protected virtual void Awake() {
@@ -67,9 +68,14 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
-        if (shieldCount > 0) shieldCount--;
-
-        else {
+        if (shieldCount > 0)
+        {
+            shieldCount--;
+            if (shieldCount == 0)
+                shieldObj.SetActive(false);
+        }
+        else
+        {
             Speed -= GetCollisionSpeed();
             SoundManager.PlaySound(collisionSound);
         }
@@ -95,7 +101,10 @@ public partial class Player : MonoBehaviour {
         get { return bCanUseSkill; }
     }
 
-    public void GetShield() {
+    public void GetShield()
+    {
         shieldCount++;
+        if (shieldCount == 1)
+            shieldObj.SetActive(true);
     }
 }

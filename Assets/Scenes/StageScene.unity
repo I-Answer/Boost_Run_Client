@@ -3576,7 +3576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 600
-  appearProbability: 0.15
+  appearProbability: 0.1
 --- !u!4 &1582682507
 Transform:
   m_ObjectHideFlags: 0
@@ -3711,6 +3711,7 @@ MonoBehaviour:
   - {fileID: 1891782262205052, guid: 10acff5420c90bf40a37a1afdb18d885, type: 2}
   - {fileID: 1764484532530696, guid: 4070e450d359bce4286feafefacdedab, type: 2}
   - {fileID: 1278806469838266, guid: 576092f9737a85d4aaa210dad51c8177, type: 2}
+  startTime: 0
 --- !u!4 &1632574825
 Transform:
   m_ObjectHideFlags: 0
