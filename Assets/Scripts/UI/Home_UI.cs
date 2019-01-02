@@ -15,7 +15,7 @@ public class Home_UI : MonoBehaviour {
 
     public GameObject rank, repair, shop;
 
-    public GameObject completeBuyWnd;
+    public Notice_UI completeBuy;
 
     public Image curImage;
     public Content[] spaceShipImage;
@@ -91,7 +91,7 @@ public class Home_UI : MonoBehaviour {
     }
 
     private void CompleteBuy(UserSpaceship[] updateShip) {
-        completeBuyWnd.SetActive(true);
+        completeBuy.Enable();
 
         spaceShipImage[newBuyShip].repair.color = activeColor;
         spaceShipImage[newBuyShip].shop.color = inactiveColor;

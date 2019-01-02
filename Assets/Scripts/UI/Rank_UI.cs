@@ -24,6 +24,7 @@ public class Rank_UI : MonoBehaviour {
     public Text guideText;
 
     public RectTransform content;
+    public Notice_UI notConnected;
 
     private RecordBuffer<UserSpeed> speedBuffer;
     private RecordBuffer<UserTime> timeBuffer;
@@ -39,6 +40,7 @@ public class Rank_UI : MonoBehaviour {
 
     private void OnEnable() {
         if (!NetworkManager.IsConnected) {
+            notConnected.Enable();
             gameObject.SetActive(false);
             return;
         }
