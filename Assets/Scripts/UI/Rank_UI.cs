@@ -38,6 +38,11 @@ public class Rank_UI : MonoBehaviour {
     }
 
     private void OnEnable() {
+        if (!NetworkManager.IsConnected) {
+            gameObject.SetActive(false);
+            return;
+        }
+
         speedBuffer.Clear();
         timeBuffer.Clear();
 

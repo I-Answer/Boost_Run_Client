@@ -2,6 +2,9 @@
 
 public class UserManager : MonoBehaviour {
 
+    public static readonly RegalUser OfflineUser =
+        new RegalUser("Offline", 0, 0, (1 << (int)SpaceShipList.All) - 1);
+
     private static UserManager instance;
 
     public static UserManager Instance {
@@ -22,7 +25,14 @@ public class UserManager : MonoBehaviour {
 
     public void SetPlayer(UserAllInfo[] user) {
         playerInfo = new RegalUser(user[0].nick, user[0].maxSpeed, user[0].maxTime, user[0].bitflag);
-        selectIndex = PlayerPrefs.GetInt(Player.Name, 0);
+        selectIndex = (int)SpaceShipList.Red;
+
+        SoundManager.Init(playerInfo.Name);
+    }
+
+    public void SetPlayer(RegalUser user) {
+        playerInfo = user;
+        selectIndex = (int)SpaceShipList.Red;
 
         SoundManager.Init(playerInfo.Name);
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
 
-    private readonly Vector3 appearZPos = new Vector3(0, 0, 600);
+    private readonly Vector3 appearZPos = new Vector3(0, 0, 610);
 
     private List<FieldObject> unusedObject;
     private static PosGenerator posGenerator;

@@ -4,10 +4,6 @@
 using UnityEngine.Advertisements;
 #endif
 
-#if UNITY_ANALYTICS
-using UnityEngine.Analytics;
-#endif
-
 public class ServiceManager : MonoBehaviour {
 
     public enum AdState {

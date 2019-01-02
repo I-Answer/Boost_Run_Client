@@ -38,12 +38,15 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0f;
         endureTime = (int)(Time.time - startTime);
 
+        GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
+
+        if (!NetworkManager.IsConnected) return;
+
         ServerConnector.PostDictionary.Clear();
         ServerConnector.PostDictionary.Add("speed", maxSpeed.ToString());
         ServerConnector.PostDictionary.Add("time", endureTime.ToString());
         ServerConnector.PostDictionary.Add("nick", UserManager.Instance.Player.Name);
-
-        GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
+            
         ServerConnector.Instance.POST<Result>(ServerApi.AddRecord);
     }
 
@@ -67,10 +70,6 @@ public class GameManager : MonoBehaviour {
 
             if (obj is IPlayerConnect) (obj as IPlayerConnect).PlayerConnect(player);
         }
-    }
-
-    private void ActiveGameoverWindow(Result[] result) {
-        GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
     }
 
     private byte GetChangeEventFlag() {

@@ -1,7 +1,7 @@
 ﻿using System;
 
 public enum SpaceShipList {
-    Red, Pink, Yellow, Green, Sky, Purple
+    Red, Pink, Yellow, Green, Sky, Purple, All
 }
 
 public class RegalUser {

@@ -17,6 +17,11 @@ public class Login_UI : MonoBehaviour {
     private void Awake() {
         if (UserManager.Instance.Player != null)
             gameObject.SetActive(false);
+
+        else if (!NetworkManager.IsConnected) {
+            UserManager.Instance.SetPlayer(UserManager.OfflineUser);
+            gameObject.SetActive(false);
+        }
     }
 
     public void ActiveSignIn() {
