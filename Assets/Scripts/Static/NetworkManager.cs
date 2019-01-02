@@ -6,6 +6,5 @@ public static class NetworkManager {
 
     static NetworkManager() {
         IsConnected = Application.internetReachability != NetworkReachability.NotReachable;
-        Debug.Log(IsConnected);
     }
 }

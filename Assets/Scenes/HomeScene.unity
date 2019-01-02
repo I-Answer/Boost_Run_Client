@@ -3620,6 +3620,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38dd14c40cfaa84bae66080b795cc88, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &639781890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114525717531075544, guid: e10dbce50d5d2f548b605ed050f69093,
+    type: 2}
+  m_PrefabInternal: {fileID: 443769617}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &671646172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1542200312781288, guid: e10dbce50d5d2f548b605ed050f69093,
@@ -3786,6 +3792,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725345590}
   m_CullTransparentMesh: 0
+--- !u!114 &729181925 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114469214675964680, guid: e10dbce50d5d2f548b605ed050f69093,
+    type: 2}
+  m_PrefabInternal: {fileID: 443769617}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &731532108
 Prefab:
   m_ObjectHideFlags: 0
@@ -4697,6 +4709,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 530, y: 760}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1016852836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114292260302466816, guid: e10dbce50d5d2f548b605ed050f69093,
+    type: 2}
+  m_PrefabInternal: {fileID: 443769617}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1020637515 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114005966231167830, guid: ca955f1595cc64449a4ba30c4d643710,
@@ -5848,6 +5866,12 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1246971034}
   m_CullTransparentMesh: 0
+--- !u!114 &1258403721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114258098479160688, guid: e10dbce50d5d2f548b605ed050f69093,
+    type: 2}
+  m_PrefabInternal: {fileID: 443769617}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1264960540 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114129640978557880, guid: ca955f1595cc64449a4ba30c4d643710,
@@ -6253,6 +6277,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d38dd14c40cfaa84bae66080b795cc88, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1376644033 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114154314947235620, guid: e10dbce50d5d2f548b605ed050f69093,
+    type: 2}
+  m_PrefabInternal: {fileID: 443769617}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1389331263
 Prefab:
   m_ObjectHideFlags: 0
@@ -8692,19 +8722,19 @@ MonoBehaviour:
   curImage: {fileID: 1264960540}
   spaceShipImage:
   - repair: {fileID: 968756838}
-    shop: {fileID: 0}
+    shop: {fileID: 729181925}
     sprite: {fileID: 21300000, guid: e46c83487379c1e43944156631d4e320, type: 3}
   - repair: {fileID: 482529794}
-    shop: {fileID: 0}
+    shop: {fileID: 639781890}
     sprite: {fileID: 21300000, guid: e79a8e5643205dc49bb3e712bcca05ae, type: 3}
   - repair: {fileID: 1020637515}
-    shop: {fileID: 0}
+    shop: {fileID: 1016852836}
     sprite: {fileID: 21300000, guid: c91aec4975335c94095d41f183bc9a85, type: 3}
   - repair: {fileID: 1590192312}
-    shop: {fileID: 0}
+    shop: {fileID: 1376644033}
     sprite: {fileID: 21300000, guid: 776a0a062560c234f9dce7315b71a52a, type: 3}
   - repair: {fileID: 691117332}
-    shop: {fileID: 0}
+    shop: {fileID: 1258403721}
     sprite: {fileID: 21300000, guid: 516897efbd7d02e4fb41054d6948a4f5, type: 3}
   - repair: {fileID: 561002752}
     shop: {fileID: 102035602}
