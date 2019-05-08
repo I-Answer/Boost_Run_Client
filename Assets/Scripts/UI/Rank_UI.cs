@@ -4,7 +4,12 @@ using UnityEngine.UI;
 
 public class Rank_UI : MonoBehaviour {
 
-    public class RecordBuffer<T> : List<T> {
+    // 새로운 랭크 추가 시 ModeCount 앞에 추가
+    private enum RankMode {
+        Speed, Time, ModeCount
+    }
+
+    public class RecordList<T> : List<T> {
         public bool IsVaild { get; private set; }
 
         public void Init(T[] collection) {
@@ -26,14 +31,16 @@ public class Rank_UI : MonoBehaviour {
     public RectTransform content;
     public Notice_UI notConnected;
 
-    private RecordBuffer<UserSpeed> speedBuffer;
-    private RecordBuffer<UserTime> timeBuffer;
-
     private List<Record_UI> records;
 
+    private List<RecordList<Rank>> ranksBuffer;
+    private RankMode nowRank;
+
     private void Awake() {
-        speedBuffer = new RecordBuffer<UserSpeed>();
-        timeBuffer = new RecordBuffer<UserTime>();
+        ranksBuffer = new List<RecordList<Rank>>((int)RankMode.ModeCount);
+
+        for (int i = 0; i < ranksBuffer.Capacity; i++)
+            ranksBuffer.Add(new RecordList<Rank>());
 
         records = new List<Record_UI>(content.GetComponentsInChildren<Record_UI>());
     }
@@ -45,66 +52,38 @@ public class Rank_UI : MonoBehaviour {
             return;
         }
 
-        speedBuffer.Clear();
-        timeBuffer.Clear();
+        for (int i = 0; i < ranksBuffer.Capacity; i++)
+            ranksBuffer[i].Clear();
 
-        PresentSpeedRank();
+        PresentRank((int)RankMode.Speed);
     }
 
-    public void PresentSpeedRank() {
+    public void PresentRank(int mode) {
+        nowRank = (RankMode)mode;
+
         EnableBody(false);
         guideText.text = speedGuide;
 
-        if (!speedBuffer.IsVaild)
-            ServerConnector.Instance.GET<UserSpeed>(ServerApi.SpeedRank, GetRank);
+        if (!ranksBuffer[mode].IsVaild)
+            ServerConnector.GET<Rank>(GetRank, ServerApi.SpeedRank);
 
-        else ShowSpeedRank();
+        else ShowRank();
     }
 
-    public void PresentTimeRank() {
-        EnableBody(false);
-        guideText.text = timeGuide;
-
-        if (!timeBuffer.IsVaild)
-            ServerConnector.Instance.GET<UserTime>(ServerApi.timeRank, GetRank);
-
-        else ShowTimeRank();
+    private void GetRank(Rank[] ranks) {
+        ranksBuffer[(int)nowRank].Init(ranks);
+        ShowRank();
     }
 
-    private void GetRank(UserSpeed[] speedRanks) {
-        speedBuffer.Init(speedRanks);
-        ShowSpeedRank();
-    }
-
-    private void GetRank(UserTime[] timeRanks) {
-        timeBuffer.Init(timeRanks);
-        ShowTimeRank();
-    }
-
-    private void ShowSpeedRank() {
+    private void ShowRank() {
         int i = 0;
 
         InitContent();
 
         foreach (var record in records) {
-            if (i >= speedBuffer.Count) break;
+            if (i >= ranksBuffer[(int)nowRank].Count) break;
             
-            record.SetText(speedBuffer[i], ++i);
-            record.gameObject.SetActive(true);
-        }
-
-        EnableBody(true);
-    }
-
-    private void ShowTimeRank() {
-        int i = 0;
-
-        InitContent();
-
-        foreach (var record in records) {
-            if (i >= timeBuffer.Count) break;
-
-            record.SetText(timeBuffer[i], ++i);
+            record.SetSpeedText(ranksBuffer[(int)nowRank][i], ++i);
             record.gameObject.SetActive(true);
         }
 

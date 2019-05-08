@@ -66,7 +66,7 @@ public class SoundManager : MonoBehaviour {
         get { return instance.effectAudio.mute; }
         set {
             instance.effectAudio.mute = value;
-            PlayerPrefs.SetString(string.Format("{0} Effect Sound", UserManager.Instance.Player.Name), value.ToString());
+            PlayerPrefs.SetString(string.Format("{0} Effect Sound", UserManager.Player.Name), value.ToString());
         }
     }
 
@@ -74,7 +74,7 @@ public class SoundManager : MonoBehaviour {
         get { return instance.backgroundAudio.mute; }
         set {
             instance.backgroundAudio.mute = value;
-            PlayerPrefs.SetString(string.Format("{0} Background Sound", UserManager.Instance.Player.Name), value.ToString());
+            PlayerPrefs.SetString(string.Format("{0} Background Sound", UserManager.Player.Name), value.ToString());
         }
     }
 }

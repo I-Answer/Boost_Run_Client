@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour {
 
@@ -7,26 +8,18 @@ public class GameManager : MonoBehaviour {
     public const int posCount = 3;
     public const float distance = 10f;
 
-    private readonly Vector3 spawnPos;
-    private readonly Quaternion spawnRot;
-    private readonly Vector3 spawnScale;
+    private readonly Vector3 spawnPos = new Vector3(0f, 8f, -5f);
+    private readonly Quaternion spawnRot = Quaternion.Euler(15f, 0f, 0f);
+    private readonly Vector3 spawnScale = new Vector3(2f, 2f, 2f);
 
     private int maxSpeed;
     private int endureTime;
-    private int bitflag;
 
     public float startTime;
-
-    public GameManager() {
-        spawnPos = new Vector3(0f, 8f, -5f);
-        spawnRot = Quaternion.Euler(15f, 0f, 0f);
-        spawnScale = new Vector3(2f, 2f, 2f);
-    }
 
     private void Awake() {
         ConnectPlayer(MakePlayer().GetComponent<Player>());
 
-        maxSpeed = endureTime = 0;
         startTime = Time.time;
     }
 
@@ -41,13 +34,11 @@ public class GameManager : MonoBehaviour {
         GameOver_UI.Instance.Active(maxSpeed, endureTime, GetChangeEventFlag());
 
         if (!NetworkManager.IsConnected) return;
-
-        ServerConnector.PostDictionary.Clear();
-        ServerConnector.PostDictionary.Add("speed", maxSpeed.ToString());
-        ServerConnector.PostDictionary.Add("time", endureTime.ToString());
-        ServerConnector.PostDictionary.Add("nick", UserManager.Instance.Player.Name);
             
-        ServerConnector.Instance.POST<Result>(ServerApi.AddRecord);
+        ServerConnector.POST<Result>(null, ServerApi.AddRecord,
+            new MultipartFormDataSection("speed", maxSpeed.ToString()),
+            new MultipartFormDataSection("time", endureTime.ToString()),
+            new MultipartFormDataSection("nick", UserManager.Player.Name));
     }
 
     public void GoHomeDirect() {
@@ -56,7 +47,7 @@ public class GameManager : MonoBehaviour {
     }
     
     private GameObject MakePlayer() {
-        GameObject playerObj = Instantiate(spaceShipList[UserManager.Instance.SelectSpaceShip]);
+        GameObject playerObj = Instantiate(spaceShipList[UserManager.Player.NowSpaceShip]);
 
         playerObj.transform.position = spawnPos;
         playerObj.transform.rotation = spawnRot;
@@ -75,10 +66,10 @@ public class GameManager : MonoBehaviour {
     private byte GetChangeEventFlag() {
         byte result = 0;
 
-        if (UserManager.Instance.Player.CompareMaxSpeed(maxSpeed))
+        if (UserManager.Player.CompareMaxSpeed(maxSpeed))
             result |= 0x01;
 
-        if (UserManager.Instance.Player.CompareEndureTime(endureTime))
+        if (UserManager.Player.CompareEndureTime(endureTime))
             result |= 0x02;
 
         return result;

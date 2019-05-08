@@ -18,7 +18,7 @@ public partial class Player : MonoBehaviour {
 
     public Sprite skillImage;
     public float skillCoolTime;
-    private bool bCanUseSkill;
+    private bool isCanUseSkill;
 
     private Vector3 myPos;
 
@@ -39,7 +39,7 @@ public partial class Player : MonoBehaviour {
         myPos = transform.position;
 
         hp = 1f;
-        bAlive = true;
+        isAlive = true;
     }
 
     private void Start() {
@@ -68,14 +68,13 @@ public partial class Player : MonoBehaviour {
     }
 
     public virtual void Collision() {
-        if (shieldCount > 0)
-        {
+        if (shieldCount > 0) {
             shieldCount--;
             if (shieldCount == 0)
                 shieldObj.SetActive(false);
         }
-        else
-        {
+
+        else {
             Speed -= GetCollisionSpeed();
             SoundManager.PlaySound(collisionSound);
         }
@@ -88,9 +87,9 @@ public partial class Player : MonoBehaviour {
     private IEnumerator CoolTime() {
         skillUi.UpdateUi(skillCoolTime);
 
-        bCanUseSkill = false;
+        isCanUseSkill = false;
         yield return CoroutineStorage.WaitForSeconds(skillCoolTime);
-        bCanUseSkill = true;
+        isCanUseSkill = true;
     }
 
     public Vector3 Position {
@@ -98,11 +97,10 @@ public partial class Player : MonoBehaviour {
     }
 
     protected bool CanUseSkill {
-        get { return bCanUseSkill; }
+        get { return isCanUseSkill; }
     }
 
-    public void GetShield()
-    {
+    public void GetShield() {
         shieldCount++;
         if (shieldCount == 1)
             shieldObj.SetActive(true);

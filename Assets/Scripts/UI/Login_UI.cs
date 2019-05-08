@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Login_UI : MonoBehaviour {
 
@@ -12,35 +13,18 @@ public class Login_UI : MonoBehaviour {
     public InputField signInId, signInPw;
     public InputField signUpId, signUpPw, signUpNick;
 
+    public Notice_UI signInFail, signUpFail;
+
     public AudioClip changeWindowSound, successSound;
 
     private void Awake() {
-        if (UserManager.Instance.Player != null)
+        if (UserManager.Player != null)
             gameObject.SetActive(false);
 
         else if (!NetworkManager.IsConnected) {
-            UserManager.Instance.SetPlayer(UserManager.OfflineUser);
+            UserManager.SetPlayer(UserManager.OfflineUser);
             gameObject.SetActive(false);
         }
-    }
-
-    public void ActiveSignIn() {
-        titleText.text = signIn;
-
-        ActiveWindow(true);
-
-        signUpId.text = string.Empty;
-        signUpPw.text = string.Empty;
-        signUpNick.text = string.Empty;
-    }
-
-    public void ActiveSignUp() {
-        titleText.text = signUp;
-
-        ActiveWindow(false);
-
-        signInId.text = string.Empty;
-        signInPw.text = string.Empty;
     }
 
     private void ActiveWindow(bool isSignIn) {
@@ -51,30 +35,58 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void SignIn() {
-        ServerConnector.Instance.GET<UserAllInfo>(ServerApi.GetUser + signInId.text, CheckSignIn);
+        ServerConnector.GET<UserInfo>(CheckSignIn, ServerApi.GetUser + signInId.text);
     }
 
-    private void CheckSignIn(UserAllInfo[] user) {
-        if (signInPw.text.Equals(user[0].password)) {
+    private void CheckSignIn(UserInfo[] user) {
+        if (user[0].isSuccess) {
             SoundManager.PlaySound(successSound);
 
-            UserManager.Instance.SetPlayer(user);
+            UserManager.SetPlayer(user[0]);
             gameObject.SetActive(false);
+        }
+
+        else {
+            signInFail.Enable();
+            ActiveSignIn();
         }
     }
 
     public void SignUp() {
-        ServerConnector.PostDictionary.Clear();
-        ServerConnector.PostDictionary.Add("id", signUpId.text);
-        ServerConnector.PostDictionary.Add("password", signUpPw.text);
-        ServerConnector.PostDictionary.Add("nick", signUpNick.text);
-
-        ServerConnector.Instance.POST<UserInfo>(ServerApi.PostUser, CheckSignUp);
+        ServerConnector.POST<Result>(CheckSignUp, ServerApi.PostUser,
+            new MultipartFormDataSection("id", signUpId.text),
+            new MultipartFormDataSection("password", signUpPw.text),
+            new MultipartFormDataSection("nick", signUpNick.text));
     }
 
-    private void CheckSignUp(UserInfo[] user) {
-        SoundManager.PlaySound(successSound);
+    private void CheckSignUp(Result[] result) {
+        if (result[0].isSuccess) {
+            SoundManager.PlaySound(successSound);
+            ActiveSignIn();
+        }
 
-        ActiveSignIn();
+        else {
+            signUpFail.Enable();
+            ActiveSignUp();
+        }
+    }
+
+    public void ActiveSignIn() {
+        titleText.text = signIn;
+
+        ActiveWindow(true);
+
+        signInId.text = string.Empty;
+        signInPw.text = string.Empty;
+    }
+
+    public void ActiveSignUp() {
+        titleText.text = signUp;
+
+        ActiveWindow(false);
+
+        signUpId.text = string.Empty;
+        signUpPw.text = string.Empty;
+        signUpNick.text = string.Empty;
     }
 }

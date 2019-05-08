@@ -5,7 +5,6 @@ public class GreenPlayer : Player {
 
     public float invincibleTime;
     private bool isInvincibilityMode;
-    private bool isShieldInit = false;
 
     public override void UseSkill() {
         if (!CanUseSkill) return;

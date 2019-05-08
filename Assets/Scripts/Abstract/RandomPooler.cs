@@ -67,7 +67,7 @@ public abstract class RandomPooler : MonoBehaviour, IPlayerConnect {
     }
 
     private float GetWaitTime() {
-        if (player.Speed == 0) return 0.1f;
+        if (Mathf.Approximately(player.Speed, 0f)) return 0.1f;
 
         return distance / player.Speed;
     }

@@ -3,7 +3,6 @@
 public class SkyPlayer : Player {
 
     private int equipShieldCount = 0;
-    private bool isShieldInit = false;
 
     public override void UseSkill() {
         if (!CanUseSkill) return;

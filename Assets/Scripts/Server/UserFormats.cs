@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine.Networking;
 
 public enum SpaceShipList {
     Red, Pink, Yellow, Green, Sky, Purple, All
@@ -6,32 +7,33 @@ public enum SpaceShipList {
 
 public class RegalUser {
 
-    private string name;
-    private int maxSpeed;
-    private int endureTime;
-    private int spaceShipList;
+    public string Name { get; private set; }
+    public int MaxSpeed { get; private set; }
+    public int EndureTime { get; private set; }
+    public int SpaceShipList { get; private set; }
+    public int NowSpaceShip { get; private set; }
 
-    public RegalUser(string name, int maxSpeed, int endureTime, int spaceShipList) {
-        this.name = name;
-        this.maxSpeed = maxSpeed;
-        this.endureTime = endureTime;
-        this.spaceShipList = spaceShipList;
+    public RegalUser(string name, int maxSpeed, int endureTime, int spaceShipList, int nowSpaceShip) {
+        Name = name;
+        MaxSpeed = maxSpeed;
+        EndureTime = endureTime;
+        SpaceShipList = spaceShipList;
+        NowSpaceShip = nowSpaceShip;
     }
 
-    public void BuySpaceShip(int buySpaceShip, Action<UserSpaceship[]> applyUi) {
-        if ((spaceShipList & buySpaceShip) != 0) return;
+    public void BuySpaceShip(int buySpaceShip, Action<Result[]> applyUi) {
+        if ((SpaceShipList & buySpaceShip) != 0) return;
 
-        ServerConnector.PostDictionary.Clear();
-        ServerConnector.PostDictionary.Add("nick", UserManager.Instance.Player.Name);
-        ServerConnector.PostDictionary.Add("bitflag", buySpaceShip.ToString());
+        SpaceShipList |= buySpaceShip;
 
-        spaceShipList |= buySpaceShip;
-        ServerConnector.Instance.POST(ServerApi.Bitflag, applyUi);
+        ServerConnector.POST(applyUi, ServerApi.Bitflag,
+            new MultipartFormDataSection("nick", UserManager.Player.Name),
+            new MultipartFormDataSection("bitflag", buySpaceShip.ToString()));
     }
 
     public bool CompareMaxSpeed(int nowSpeed) {
-        if (nowSpeed > maxSpeed) {
-            maxSpeed = nowSpeed;
+        if (nowSpeed > MaxSpeed) {
+            MaxSpeed = nowSpeed;
             return true;
         }
 
@@ -39,76 +41,52 @@ public class RegalUser {
     }
 
     public bool CompareEndureTime(int nowEndureTime) {
-        if (nowEndureTime > endureTime) {
-            endureTime = nowEndureTime;
+        if (nowEndureTime > EndureTime) {
+            EndureTime = nowEndureTime;
             return true;
         }
 
         return false;
     }
 
-    public string Name {
-        get { return name; }
+    public bool SelectNewSpaceShip(int newSpaceShip) {
+        if ((SpaceShipList & (1 << newSpaceShip)) == 0)
+            return false;
+
+        NowSpaceShip = newSpaceShip;
+
+        return true;
     }
-
-    public int MaxSpeed {
-        get { return maxSpeed; }
-    }
-
-    public int EndureTime {
-        get { return endureTime; }
-    }
-
-    public int CarList {
-        get { return spaceShipList; }
-    }
-}
-
-[Serializable]
-public class UserAllInfo {
-    public string id;
-    public string password;
-    public string nick;
-    public int bitflag;
-    public int maxSpeed;
-    public int maxTime;
-}
-
-[Serializable]
-public class UserSpeed {
-    public string id;
-    public string nick;
-    public int maxSpeed;
-}
-
-[Serializable]
-public class UserTime {
-    public string id;
-    public string nick;
-    public int maxTime;
-}
-
-[Serializable]
-public class UserInfo {
-    public int bitflag;
-    public string id;
-    public string password;
-    public string nick;
-}
-
-[Serializable]
-public class UserSpaceship {
-    public string nick;
-    public int bitflag;
-}
-
-[Serializable]
-public class Record {
-    public int maxSpeed;
-    public int maxTime;
 }
 
 [Serializable]
 public class Result {
-    public bool success;
+    public bool isSuccess;
+}
+
+[Serializable]
+public class UserInfo : Result {
+    public string name;
+    public int spaceShipList;
+    public int nowSpaceShip;
+    public int sp;
+    public int maxSpeed;
+    public int maxTime;
+}
+
+[Serializable]
+public class SP : Result {
+    public int money;
+}
+
+[Serializable]
+public class Rank {
+    public string name;
+    public int score;
+}
+
+[Serializable]
+public class PersonalRank : Result {
+    public int rank;
+    public int score;
 }

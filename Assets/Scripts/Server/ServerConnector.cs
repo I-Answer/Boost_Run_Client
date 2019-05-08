@@ -2,22 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public static class ServerApi {
-    public const string SpeedRank = "http://13.59.174.126:5000/record/rank/speed";
-    public const string timeRank = "http://13.59.174.126:5000/record/rank/time";
-    public const string GetUser = "http://13.59.174.126:5000/auth/user/";
-    public const string PostUser = "http://13.59.174.126:5000/auth/user";
-    public const string Bitflag = "http://13.59.174.126:5000/bitflag";
-    public const string UserRecord = "http://13.59.174.126:5000/record/";
-    public const string AddRecord = "http://13.59.174.126:5000/record";
+public struct ServerApi {
+    public const string SpeedRank = "http://18.216.130.185:5000/record/rank/speed";
+    public const string timeRank = "http://18.216.130.185:5000/record/rank/time";
+    public const string GetUser = "http://18.216.130.185:5000/auth/user/";
+    public const string PostUser = "http://18.216.130.185:5000/auth/user";
+    public const string Bitflag = "http://18.216.130.185:5000/bitflag";
+    public const string UserRecord = "http://18.216.130.185:5000/record/";
+    public const string AddRecord = "http://18.216.130.185:5000/record";
 }
 
 public class ServerConnector : MonoBehaviour {
 
-    private static ServerConnector instance = null;
+    private static ServerConnector instance;
 
-    public static ServerConnector Instance {
+    private static ServerConnector Instance {
         get {
             if (instance == null) {
                 ServerConnector self = FindObjectOfType<ServerConnector>();
@@ -30,57 +31,54 @@ public class ServerConnector : MonoBehaviour {
         }
     }
 
-    public static Dictionary<string, string> PostDictionary { get; set; }
+    public List<IMultipartFormSection> FormData { get; set; }
 
     private void Awake() {
-        PostDictionary = new Dictionary<string, string>();
+        FormData = new List<IMultipartFormSection>();
     }
 
-    public void GET<T>(string url, Action<T[]> onSuccess = null, Action<string> onFailure = null) {
-        StartCoroutine(GetImpl(url, onSuccess, onFailure));
+    public static void GET<T>(Action<T[]> onFinish, string url) {
+        Instance.StartCoroutine(Instance.GetImpl(onFinish, url));
     }
 
-    private IEnumerator GetImpl<T>(string url, Action<T[]> onSuccess, Action<string> onFailure) {
-        var www = new WWW(url);
-        yield return www;
+    public static void POST<T>(Action<T[]> onFinish, string url, params IMultipartFormSection[] datas) {
+        Instance.FormData.Clear();
 
-        InvokeCallback(www, onSuccess, onFailure);
+        foreach (var data in datas)
+            Instance.FormData.Add(data);
+
+        Instance.StartCoroutine(Instance.POSTImpl(onFinish, url));
     }
 
-    public void POST<T>(string url, Action<T[]> onSuccess = null, Action<string> onFailure = null) {
-        StartCoroutine(POSTImpl(url, onSuccess, onFailure));
-    }
+    private IEnumerator GetImpl<T>(Action<T[]> onFinish, string url) {
+        using (var www = UnityWebRequest.Get(url)) {
+            yield return www.SendWebRequest();
 
-    private IEnumerator POSTImpl<T>(string url, Action<T[]> onSuccess, Action<string> onFailure) {
-        WWWForm form = new WWWForm();
-
-        foreach (var post_arg in PostDictionary)
-            form.AddField(post_arg.Key, post_arg.Value);
-       
-        var www = new WWW(url, form);
-
-        yield return www;
-
-        InvokeCallback(www, onSuccess, onFailure);
-    }
-
-    private void InvokeCallback<T>(WWW www, Action<T[]> onSuccess, Action<string> onFailure) {
-        if (www.error == null) {
-            var parsedResult = JsonParser.FromJson<T>(www.text);
-
-            if (onSuccess != null)
-                onSuccess(parsedResult);
-        }
-
-        else {
-            if (onFailure != null)
-                onFailure(www.error);
+            InvokeCallback(onFinish, www);
         }
     }
 
-    public static void ThrowIfFailed(string errorMessage) {
+    private IEnumerator POSTImpl<T>(Action<T[]> onFinish, string url) {
+        using (var www = UnityWebRequest.Post(url, FormData)) {
+            yield return www.SendWebRequest();
+
+            InvokeCallback(onFinish, www);
+        }
+    }
+
+    private void InvokeCallback<T>(Action<T[]> onFinish, UnityWebRequest www) {
+        if (!www.isNetworkError && !www.isHttpError) {
+            Debug.Log(www.downloadHandler.text);
+            var parsedResult = JsonParser.FromJson<T>(www.downloadHandler.text);
+
+            if (onFinish != null)
+                onFinish(parsedResult);
+        }
+
 #if UNITY_EDITOR
-        Debug.Log(errorMessage);
+        else {
+            Debug.Log(www.error);
+        }
 #endif
     }
 }
