@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * 한 번 생성된 자리가 연속으로 생성될 가능성이 있기에 공평히 생성되도록 구현
+ * 바로 이전에 나온 자리는 나오지 않음
+*/
 public class PosGenerator {
 
     private class AppearPos {

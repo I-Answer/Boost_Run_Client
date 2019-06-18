@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public struct ServerApi {
-    public const string SpeedRank = "http://18.216.130.185:5000/record/rank/speed";
-    public const string timeRank = "http://18.216.130.185:5000/record/rank/time";
-    public const string GetUser = "http://18.216.130.185:5000/auth/user/";
-    public const string PostUser = "http://18.216.130.185:5000/auth/user";
-    public const string Bitflag = "http://18.216.130.185:5000/bitflag";
-    public const string UserRecord = "http://18.216.130.185:5000/record/";
-    public const string AddRecord = "http://18.216.130.185:5000/record";
+    public const string SpeedRank = "http://18.220.117.207:5000/record/rank/speed";
+    public const string TimeRank = "http://18.220.117.207:5000/record/rank/time";
+    public const string SignIn = "http://18.220.117.207:5000/auth/signIn/";
+    public const string SignUp = "http://18.220.117.207:5000/auth/signUp";
+    public const string Bitflag = "http://18.220.117.207:5000/bitflag";
+    public const string UserRecord = "http://18.220.117.207:5000/record/";
+    public const string AddRecord = "http://18.220.117.207:5000/record";
 }
 
 public class ServerConnector : MonoBehaviour {

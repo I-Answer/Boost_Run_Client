@@ -35,7 +35,7 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void SignIn() {
-        ServerConnector.GET<UserInfo>(CheckSignIn, ServerApi.GetUser + signInId.text);
+        ServerConnector.GET<UserInfo>(CheckSignIn, ServerApi.SignIn + signInId.text);
     }
 
     private void CheckSignIn(UserInfo[] user) {
@@ -53,8 +53,8 @@ public class Login_UI : MonoBehaviour {
     }
 
     public void SignUp() {
-        ServerConnector.POST<Result>(CheckSignUp, ServerApi.PostUser,
-            new MultipartFormDataSection("id", signUpId.text),
+        ServerConnector.POST<Result>(CheckSignUp, ServerApi.SignUp,
+            new MultipartFormDataSection("id", signUpId.text),  
             new MultipartFormDataSection("password", signUpPw.text),
             new MultipartFormDataSection("nick", signUpNick.text));
     }
