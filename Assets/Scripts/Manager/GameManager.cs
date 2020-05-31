@@ -57,10 +57,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void ConnectPlayer(Player player) {
-        foreach (MonoBehaviour obj in FindObjectsOfType(typeof(MonoBehaviour))) {
-
-            if (obj is IPlayerConnect) (obj as IPlayerConnect).PlayerConnect(player);
-        }
+        foreach (MonoBehaviour obj in FindObjectsOfType(typeof(MonoBehaviour)))
+            if (obj is IPlayerConnect) 
+                (obj as IPlayerConnect).PlayerConnect(player);
     }
 
     private byte GetChangeEventFlag() {
